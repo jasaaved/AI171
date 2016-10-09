@@ -25,12 +25,12 @@ AIShell::~AIShell()
 }
 
 Move AIShell::makeMove(){
-	int col = rand() % numCols + 1;
-	int row = rand() % numRows + 1;
+	int col = rand() % numCols;
+	int row = rand() % numRows;
 
-	if (gameState[col][row] != NO_PIECE){
-		col = rand() % numCols + 1;
-		row = rand() % numRows + 1;
+	while (gameState[col][row] != NO_PIECE){
+		col = rand() % numCols;
+		row = rand() % numRows;
 	}
 	Move m(col, row);
 	return m;
