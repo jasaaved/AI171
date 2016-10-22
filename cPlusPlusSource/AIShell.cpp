@@ -10,6 +10,7 @@ AIShell::AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move
 	this->gravityOn=gravityOn;
 	this->gameState=gameState;
 	this->lastMove=lastMove;
+	this->depth=3;
 }
 
 
@@ -25,14 +26,16 @@ AIShell::~AIShell()
 }
 
 Move AIShell::makeMove(){
-	int col = rand() % numCols;
-	int row = rand() % numRows;
+	
 
-	while (gameState[col][row] != NO_PIECE){
-		col = rand() % numCols;
-		row = rand() % numRows;
-	}
-	Move m(col, row);
-	return m;
+	//int col = rand() % numCols;
+	//int row = rand() % numRows;
+
+	//while (gameState[col][row] != NO_PIECE){
+	//	col = rand() % numCols;
+	//	row = rand() % numRows;
+	//}
+	//Move m(col, row);
+	//return m;
 	 
 }
