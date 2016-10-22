@@ -89,10 +89,10 @@ AIShell* makeAIShellFromInput(){
 			shell->deadline=deadline;
 			shell->k=k;
 			if (gravity){
-				this->depth = 4;
+				shell->depth = 4;
 			}
 			if (!gravity){
-				this->depth = 3;
+				shell->depth = 3;
 			}  
 
 			return shell;

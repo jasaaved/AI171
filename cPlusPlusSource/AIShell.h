@@ -23,15 +23,21 @@ private:
 	int **gameState; //a pointer to a two-dimensional array representing the game state.
 	bool gravityOn; //this will be true if gravity is turned on. It will be false if gravity is turned off.
 	Move lastMove; //this is the move made last by your opponent. If your opponent has not made a move yet (you move first) then this move will hold the value (-1, -1) instead.
-	int depth;
+	
 
 public:
 	int deadline; //this is how many milliseconds the AI has to make move.
 	int k;        // k is the number of pieces a player must get in a row/column/diagonal to win the game. IE in connect 4, this variable would be 4
+	int depth;
 
 	AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move lastMove);
 	~AIShell();
 	Move makeMove();
+	Move minimax(int d);
+	int FindMax(int d);
+	int FindMin(int d);
+	int heuristic(int m);
+	int score();
 };
 
 #endif //AISHELL_H
