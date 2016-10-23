@@ -202,7 +202,7 @@ void AIShell::check_columns() {
 				}
 
 				if (Hum_row == k) {
-					p_Humscore = 1000;
+					p_Humscore = 10000;
 					break;
 				}
 
@@ -299,7 +299,7 @@ void AIShell::check_rows() {
 				}
 
 				if (Hum_row == k) {
-					p_Humscore = 1000;
+					p_Humscore = 10000;
 					break;
 				}
 
