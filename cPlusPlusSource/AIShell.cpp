@@ -253,7 +253,21 @@ void AIShell::check_rows() {
 						}
 
 						else {
-							AI_score += sum_of_elems;
+							int size = in_a_row.size() - 1;
+							static int counter = 1;
+							static int *num1 = &in_a_row[0];
+							static int *num2 = &in_a_row[1];
+							for (int n = 0; n<size; n++)
+							{
+								if (*num1 == *num2 && *num1 == 1) counter++;
+								else
+								{
+									counter = 1;
+								}
+								num1++;
+								num2++;
+							}
+							AI_score += counter;
 						}
 					}
 
@@ -268,7 +282,21 @@ void AIShell::check_rows() {
 							}
 
 							else {
-								Human_score += (-sum_of_elems);
+								int size = in_a_row.size() - 1;
+								static int counter = 1;
+								static int *num1 = &in_a_row[0];
+								static int *num2 = &in_a_row[1];
+								for (int n = 0; n<size; n++)
+								{
+									if (*num1 == *num2 && *num1 == -1) counter++;
+									else
+									{
+										counter = 1;
+									}
+									num1++;
+									num2++;
+								}
+								Human_score += counter;
 							}
 						}
 					}
