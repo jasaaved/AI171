@@ -135,7 +135,6 @@ int AIShell::score() {
 }
 
 void AIShell::check_columns() {
-	int sum_of_elems;
 	std::vector<int> in_a_row;
 	int size;
 	int counter;
@@ -143,87 +142,70 @@ void AIShell::check_columns() {
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
-			sum_of_elems = 0;
 			counter = 1;
 			temp_counter = 1;
+			in_a_row.clear();
 			for (int s = 0; s < k; s++) {
-				if (s + j >= numRows) {
-					in_a_row.clear();
+				if ((s + j) >= numRows) {
 					break;
 				}
-				in_a_row.push_back(gameState[i][j + s]);
-				if (s == (k-1)) {
 
+				in_a_row.push_back(gameState[i][j + s]);
+
+				if (s <= (k - 1)) {
+					size = in_a_row.size();
 					if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end() && std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
 						AI_score += 0;
 						Human_score += 0;
 					}
-						
+
 					else if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end()) {
-						
-						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
 
-						if (sum_of_elems == k) {
-								AI_score = 100000000;
-						}
-							
-						else {
-							size = in_a_row.size() - 1;
-							for (int i = 0; i < size; i++)
-							{
-								if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
-									temp_counter++;
-									if (temp_counter >= counter) {
-										counter = temp_counter;
-									}
+						for (int i = 0; i < size; i++){
+							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+								temp_counter++;
+								if (temp_counter > counter) {
+									counter = temp_counter;
 								}
-								else
-								{
-									temp_counter = 1;
-								}
-
 							}
+							else{
+								temp_counter = 1;
+							}
+
+						}
+						if (counter == k) {
+							AI_score += 1000;
+						}
+						else {
 							AI_score += counter;
 						}
 					}
 
-					else if(std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
-						
-						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
 
-						if (sum_of_elems <= -1) {
-								
-							if (sum_of_elems == -k) {
-									Human_score = 100000000;
-							}
-								
-							else {
-								size = in_a_row.size() - 1;
-								for (int i = 0; i < size; i++)
-								{
-									if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
-										temp_counter++;
-										if (temp_counter >= counter) {
-											counter = temp_counter;
-										}
-									}
-									else
-									{
-										temp_counter = 1;
-									}
-
+					else if (std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
+						for (int i = 0; i < size; i++) {
+							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == -1)) {
+								temp_counter++;
+								if (temp_counter > counter) {
+									counter = temp_counter;
 								}
-								Human_score += counter;
 							}
+							else {
+								temp_counter = 1;
+							}
+
+						}
+						if (counter == k) {
+							Human_score += 1000;
+						}
+						else {
+							Human_score += counter;
 						}
 					}
-
 					else {
 						AI_score++;
 						Human_score++;
 					}
-
-					in_a_row.clear();
 				}
 			}
 		}
@@ -231,8 +213,9 @@ void AIShell::check_columns() {
 }
 
 
+
+
 void AIShell::check_rows() {
-	int sum_of_elems;
 	std::vector<int> in_a_row;
 	int size;
 	int counter;
@@ -240,15 +223,18 @@ void AIShell::check_rows() {
 
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
-			sum_of_elems = 0;
+			counter = 1;
+			temp_counter = 1;
+			in_a_row.clear();
 			for (int s = 0; s < k; s++) {
-				if (s + j >= numCols) {
-					in_a_row.clear();
+				if ((s + j) >= numCols) {
 					break;
 				}
-				in_a_row.push_back(gameState[j + s][i]);
-				if (s == (k - 1)) {
 
+				in_a_row.push_back(gameState[j + s][i]);
+
+				if (s <= (k - 1)) {
+					size = in_a_row.size();
 					if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end() && std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
 						AI_score += 0;
 						Human_score += 0;
@@ -256,73 +242,56 @@ void AIShell::check_rows() {
 
 					else if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end()) {
 
-						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
-
-						if (sum_of_elems == k) {
-							AI_score = 100000000;
-						}
-
-						else {
-							size = in_a_row.size() - 1;
-							for (int i = 0; i < size; i++)
-							{
-								if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
-									temp_counter++;
-									if (temp_counter >= counter) {
-										counter = temp_counter;
-									}
+						for (int i = 0; i < size; i++) {
+							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+								temp_counter++;
+								if (temp_counter > counter) {
+									counter = temp_counter;
 								}
-								else
-								{
-									temp_counter = 1;
-								}
-
 							}
+							else {
+								temp_counter = 1;
+							}
+
+						}
+						if (counter == k) {
+							AI_score += 1000;
+						}
+						else {
 							AI_score += counter;
 						}
 					}
 
 					else if (std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
-
-						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
-
-						if (sum_of_elems <= -1) {
-
-							if (sum_of_elems == -k) {
-								Human_score = 100000000;
-							}
-
-							else {
-								size = in_a_row.size() - 1;
-								for (int i = 0; i < size; i++)
-								{
-									if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
-										temp_counter++;
-										if (temp_counter >= counter) {
-											counter = temp_counter;
-										}
-									}
-									else
-									{
-										temp_counter = 1;
-									}
-
+						for (int i = 0; i < size; i++) {
+							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == -1)) {
+								temp_counter++;
+								if (temp_counter > counter) {
+									counter = temp_counter;
 								}
-								Human_score += counter;
 							}
+							else {
+								temp_counter = 1;
+							}
+
+						}
+						if (counter == k) {
+							Human_score += 1000;
+						}
+						else {
+							Human_score += counter;
 						}
 					}
-
 					else {
 						AI_score++;
 						Human_score++;
 					}
-					in_a_row.clear();
 				}
 			}
 		}
 	}
 }
+
 
 void AIShell::check_diagonals() {
 	int temp_AI = 0;
