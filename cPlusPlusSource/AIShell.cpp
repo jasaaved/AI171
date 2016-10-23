@@ -200,10 +200,6 @@ void AIShell::check_columns() {
 						}
 						Human_score += (counter * 5);
 					}
-					else {
-						AI_score++;
-						Human_score++;
-					}
 				}
 			}
 		}
@@ -275,10 +271,6 @@ void AIShell::check_rows() {
 
 						}
 						Human_score += (counter * 5);
-					}
-					else {
-						AI_score++;
-						Human_score++;
 					}
 				}
 			}
