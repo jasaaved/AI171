@@ -299,7 +299,7 @@ void AIShell::check_rows() {
 				}
 
 				if (Hum_row == k) {
-					p_AIscore = 1000;
+					p_Humscore = 1000;
 					break;
 				}
 
