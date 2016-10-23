@@ -134,10 +134,7 @@ int AIShell::score() {
 }
 
 void AIShell::check_columns() {
-	int temp_AI = 0;
-	int temp_Hum = 0;
 	int sum_of_elems;
-
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
@@ -155,18 +152,18 @@ void AIShell::check_columns() {
 				if (s == (k-1)) {
 
 					if (sum_of_elems == 0) {
-						temp_AI++;
-						temp_Hum++;
+						AI_score++;
+						Human_score++;
 					}
 						
 					else if (sum_of_elems >= 1) {
 							
 						if (sum_of_elems == k) {
-								temp_AI = 100;
+								AI_score = 100;
 						}
 							
 						else {
-								temp_AI++;
+								AI_score++;
 						}
 					}
 
@@ -175,11 +172,11 @@ void AIShell::check_columns() {
 						if (sum_of_elems <= -1) {
 								
 							if (sum_of_elems == -k) {
-									temp_AI = 100;
+									Human_score = 100;
 							}
 								
 							else {
-									temp_AI++;
+									Human_score++;
 							}
 						}
 					}
@@ -187,16 +184,10 @@ void AIShell::check_columns() {
 			}
 		}
 	}
-		AI_score += temp_AI;
-		Human_score += temp_Hum;
 }
 
 
 void AIShell::check_rows() {
-	int temp_AI = 0;
-	int temp_Hum = 0;
-	bool AI_control = false;
-	bool Hum_control = false;
 	int sum_of_elems = 0;
 
 
@@ -216,18 +207,18 @@ void AIShell::check_rows() {
 				if (s == (k - 1)) {
 
 					if (sum_of_elems == 0) {
-						temp_AI++;
-						temp_Hum++;
+						AI_score++;
+						Human_score++;
 					}
 
 					else if (sum_of_elems >= 1) {
 
 						if (sum_of_elems == k) {
-							temp_AI = 100;
+							AI_score = 100;
 						}
 
 						else {
-							temp_AI++;
+							AI_score++;
 						}
 					}
 
@@ -236,11 +227,11 @@ void AIShell::check_rows() {
 						if (sum_of_elems <= -1) {
 
 							if (sum_of_elems == -k) {
-								temp_AI = 100;
+								Human_score = 100;
 							}
 
 							else {
-								temp_AI++;
+								Human_score++;
 							}
 						}
 					}
@@ -248,8 +239,6 @@ void AIShell::check_rows() {
 			}
 		}
 	}
-	AI_score += temp_AI;
-	Human_score += temp_Hum;
 }
 
 void AIShell::check_diagonals() {
