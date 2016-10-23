@@ -38,9 +38,9 @@ public:
 	int FindMax(int d);
 	int FindMin(int d);
 	int score();
-	void check_rows(int* AI_score, int* Human_score);
-	void check_columns(int *AI_score, int* Human_score);
-	void check_diagonals(int *AI_score, int* Human_score);
+	void check_rows();
+	void check_columns();
+	void check_diagonals();
 };
 
 #endif //AISHELL_H

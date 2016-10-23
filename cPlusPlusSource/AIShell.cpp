@@ -50,7 +50,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int d) {
-	int min = 100;
+	int min = 1000;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -84,7 +84,7 @@ int AIShell::FindMin(int d) {
 }
 
 int AIShell::FindMax(int d) {
-	int max = -100;
+	int max = -1000;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -121,8 +121,8 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 
-	check_columns(&AI_score, &Human_score);
-	check_rows(&AI_score, &Human_score);
+	check_columns();
+	check_rows();
 	//check_diagonals(&AI_score, &Human_score);
 
 	std::cout << AI_score << std::endl;
@@ -133,11 +133,9 @@ int AIShell::score() {
 
 }
 
-void AIShell::check_columns(int* AI_score, int* Human_score) {
+void AIShell::check_columns() {
 	int temp_AI = 0;
 	int temp_Hum = 0;
-	bool AI_control = false;
-	bool Hum_control = false;
 	int sum_of_elems = 0;
 	std::vector<int> current;
 
@@ -190,12 +188,12 @@ void AIShell::check_columns(int* AI_score, int* Human_score) {
 			}
 		}
 	}
-		*AI_score += temp_AI;
-		*Human_score += temp_Hum;
+		AI_score += temp_AI;
+		Human_score += temp_Hum;
 }
 
 
-void AIShell::check_rows(int* AI_score, int* Human_score) {
+void AIShell::check_rows() {
 	int temp_AI = 0;
 	int temp_Hum = 0;
 	bool AI_control = false;
@@ -210,7 +208,7 @@ void AIShell::check_rows(int* AI_score, int* Human_score) {
 					current.clear();
 					break;
 				}
-				current.push_back(gameState[i][j + s]);
+				current.push_back(gameState[j + s][i]);
 				if (s = (k - 1)) {
 					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
 						break;
@@ -252,11 +250,11 @@ void AIShell::check_rows(int* AI_score, int* Human_score) {
 			}
 		}
 	}
-	*AI_score += temp_AI;
-	*Human_score += temp_Hum;
+	AI_score += temp_AI;
+	Human_score += temp_Hum;
 }
 
-void AIShell::check_diagonals(int* AI_score, int* Human_score) {
+void AIShell::check_diagonals() {
 	int temp_AI = 0;
 	int temp_Hum = 0;
 	return;
@@ -293,8 +291,8 @@ void AIShell::check_diagonals(int* AI_score, int* Human_score) {
 				}
 			}
 		}
-		*AI_score += temp_AI;
-		*Human_score += temp_Hum;
+		AI_score += temp_AI;
+		Human_score += temp_Hum;
 	}
 
 }
