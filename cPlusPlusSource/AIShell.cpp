@@ -123,23 +123,10 @@ int AIShell::score() {
 
 	check_columns(&AI_score, &Human_score);
 	check_rows(&AI_score, &Human_score);
-	check_diagonals(&AI_score, &Human_score);
+	//check_diagonals(&AI_score, &Human_score);
 
 	return (AI_score - Human_score);
 
-
-	if (gravityOn) {
-		for (int i = 0; i < numCols; i++) {
-			
-			if (gameState[i][0] == AI_PIECE) {
-				//for (int j = 1; j < numRows; j++)
-
-			}
-
-		}
-
-	}
-	return 5;
 }
 
 void AIShell::check_columns(int* AI_score, int* Human_score) {
