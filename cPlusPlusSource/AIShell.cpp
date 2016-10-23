@@ -134,34 +134,30 @@ void AIShell::check_columns(int* AI_score, int* Human_score) {
 	int temp_Hum = 0;
 	bool AI_control = false;
 	bool Hum_control = false;
+	std::vector<int> current;
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
-
-			if (gameState[i][j] == AI_PIECE){
-				AI_control = true;
-				temp_AI++;
-				if (Hum_control == true) {
-					Hum_control = 0;
-					Hum_control = false;
+			for (int s = 0; s < k; s++) {
+				if (s + j >= numRows) {
+					current.clear();
+					break;
 				}
-			}
+				current.push_back(gameState[i][j + s]);
+				if (s = (k - 1)) {
+					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) == current.end()) {
+						temp_AI++;
+					}
 
-			if (gameState[i][j] == HUMAN_PIECE) {
-				Hum_control = true;
-				temp_Hum++;
-				if (AI_control == true) {
-					AI_control = 0;
-					AI_control = false;
-				}
-			}
+					else if (std::find(current.begin(), current.end(), -1) != current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
+						temp_Hum++;
+					}
 
-			if (gameState[i][j] == NO_PIECE) {
-				if (Hum_control) {
-					temp_Hum++;
-				}
-				if (AI_control) {
-					temp_AI++;
+					else if (std::find(current.begin(), current.end(), -1) == current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
+						temp_Hum++;
+						temp_AI++;
+					}
+					current.clear();
 				}
 			}
 		}
@@ -175,34 +171,30 @@ void AIShell::check_rows(int* AI_score, int* Human_score) {
 	int temp_Hum = 0;
 	bool AI_control = false;
 	bool Hum_control = false;
+	std::vector<int> current;
 
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
-
-			if (gameState[j][i] == AI_PIECE) {
-				AI_control = true;
-				temp_AI++;
-				if (Hum_control == true) {
-					Hum_control = 0;
-					Hum_control = false;
+			for (int s = 0; s < k; s++) {
+				if (s + j >= numCols) {
+					current.clear();
+					break;
 				}
-			}
+				current.push_back(gameState[j + s][i]);
+				if (s = (k - 1)) {
+					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) == current.end()) {
+						temp_AI++;
+					}
 
-			if (gameState[j][i] == HUMAN_PIECE) {
-				Hum_control = true;
-				temp_Hum++;
-				if (AI_control == true) {
-					AI_control = 0;
-					AI_control = false;
-				}
-			}
+					else if (std::find(current.begin(), current.end(), -1) != current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
+						temp_Hum++;
+					}
 
-			if (gameState[j][i] == NO_PIECE) {
-				if (Hum_control) {
-					temp_Hum++;
-				}
-				if (AI_control) {
-					temp_AI++;
+					else if (std::find(current.begin(), current.end(), -1) == current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
+						temp_Hum++;
+						temp_AI++;
+					}
+					current.clear();
 				}
 			}
 		}
