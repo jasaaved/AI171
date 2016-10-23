@@ -138,6 +138,8 @@ void AIShell::check_columns() {
 	std::vector<int> in_a_row;
 	int AI_counter;
 	int current;
+	int AI_row;
+	int Hum_row;
 	int human_counter;
 	int p_AIscore;
 	int p_Humscore;
@@ -150,6 +152,8 @@ void AIShell::check_columns() {
 		human_counter = 0;
 		p_AIscore = 0;
 		p_Humscore = 0;
+		AI_row = 0;
+		Hum_row = 0;
 		last_AI = false;
 		last_hum = false;
 		for (int j = 0; j < numRows; j++) {
@@ -161,33 +165,45 @@ void AIShell::check_columns() {
 			in_a_row.pop_back();
 			if (current == 1) {
 				AI_counter += 1;
-				p_AIscore += 2;
+				AI_row += 1;
 
 				if (human_counter < k) {
 					last_hum = false;
 					human_counter = 0;
 					p_Humscore = 0;
+					Hum_row = 0;
 				}
 
-				if (last_AI) {
-					p_AIscore += 2;
+				if (AI_row != k) {
+					p_AIscore += (5 * AI_row);
 				}
 
-				last_AI = true;
+				if (AI_row == k) {
+					p_AIscore = 1000;
+					break;
+				}
+
 			}
 
 			else if (current == -1) {
 				human_counter += 1;
-				p_Humscore += 2;
+				Hum_row += 1;
 
 				if (AI_counter < k) {
 					last_AI = false;
 					AI_counter = 0;
 					p_AIscore = 0;
+					AI_row = 0;
+
 				}
 
-				if (last_hum) {
-					p_Humscore += 2;
+				if (Hum_row != k) {
+					p_Humscore += (5 * Hum_row);
+				}
+
+				if (Hum_row == k) {
+					p_Humscore = 1000;
+					break;
 				}
 
 				last_hum = true;
@@ -197,11 +213,13 @@ void AIShell::check_columns() {
 				if (last_hum) {
 					human_counter += 1;
 					p_Humscore += 1;
+					Hum_row = 0;
 				}
 
 				if (last_AI) {
 					AI_counter += 1;
 					p_AIscore += 1;
+					AI_row = 0;
 				}
 			}
 		}
@@ -217,6 +235,8 @@ void AIShell::check_rows() {
 	std::vector<int> in_a_row;
 	int AI_counter;
 	int current;
+	int AI_row;
+	int Hum_row;
 	int human_counter;
 	int p_AIscore;
 	int p_Humscore;
@@ -229,43 +249,58 @@ void AIShell::check_rows() {
 		human_counter = 0;
 		p_AIscore = 0;
 		p_Humscore = 0;
+		AI_row = 0;
+		Hum_row = 0;
 		last_AI = false;
 		last_hum = false;
 		for (int j = 0; j < numCols; j++) {
 			in_a_row.push_back(gameState[j][i]);
 		}
+
 		while (!in_a_row.empty()) {
 			current = in_a_row.back();
 			in_a_row.pop_back();
 			if (current == 1) {
 				AI_counter += 1;
-				p_AIscore += 2;
+				AI_row += 1;
 
 				if (human_counter < k) {
 					last_hum = false;
 					human_counter = 0;
 					p_Humscore = 0;
+					Hum_row = 0;
 				}
 
-				if (last_AI) {
-					p_AIscore += 2;
+				if (AI_row != k) {
+					p_AIscore += (5 * AI_row);
 				}
 
-				last_AI = true;
+				if (AI_row == k) {
+					p_AIscore = 1000;
+					break;
+				}
+
 			}
 
 			else if (current == -1) {
 				human_counter += 1;
-				p_Humscore += 2;
+				Hum_row += 1;
 
 				if (AI_counter < k) {
 					last_AI = false;
 					AI_counter = 0;
 					p_AIscore = 0;
+					AI_row = 0;
+
 				}
 
-				if (last_hum) {
-					p_Humscore += 2;
+				if (Hum_row != k) {
+					p_Humscore += (5 * Hum_row);
+				}
+
+				if (Hum_row == k) {
+					p_AIscore = 1000;
+					break;
 				}
 
 				last_hum = true;
@@ -275,11 +310,13 @@ void AIShell::check_rows() {
 				if (last_hum) {
 					human_counter += 1;
 					p_Humscore += 1;
+					Hum_row = 0;
 				}
 
 				if (last_AI) {
 					AI_counter += 1;
 					p_AIscore += 1;
+					AI_row = 0;
 				}
 			}
 		}
