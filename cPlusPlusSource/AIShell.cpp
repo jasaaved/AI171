@@ -173,12 +173,7 @@ void AIShell::check_columns() {
 							}
 
 						}
-						if (counter == k) {
-							AI_score += 100000000;
-						}
-						else {
-							AI_score += counter;
-						}
+						AI_score += (counter * 5);
 					}
 
 
@@ -195,12 +190,7 @@ void AIShell::check_columns() {
 							}
 
 						}
-						if (counter == k) {
-							Human_score += 100000000;
-						}
-						else {
-							Human_score += counter;
-						}
+						Human_score += (counter * 5);
 					}
 					else {
 						AI_score++;
@@ -254,12 +244,7 @@ void AIShell::check_rows() {
 							}
 
 						}
-						if (counter == k) {
-							AI_score += 100000000;
-						}
-						else {
-							AI_score += counter;
-						}
+						AI_score += (counter * 5);
 					}
 
 					else if (std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
@@ -275,12 +260,7 @@ void AIShell::check_rows() {
 							}
 
 						}
-						if (counter == k) {
-							Human_score += 100000000;
-						}
-						else {
-							Human_score += counter;
-						}
+						Human_score += (counter * 5);
 					}
 					else {
 						AI_score++;
