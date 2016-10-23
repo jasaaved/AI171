@@ -147,7 +147,6 @@ void AIShell::check_columns() {
 	
 
 	for (int i = 0; i < numCols; i++) {
-
 		for (int j = 0; j < numRows; j++) {
 			in_a_row.push_back(gameState[i][j]);
 		}
@@ -156,7 +155,7 @@ void AIShell::check_columns() {
 			in_a_row.pop_back();
 			if (current == 1) {
 				AI_counter += 1;
-				p_AIscore += 1;
+				p_AIscore += 2;
 
 				if (human_counter < k) {
 					last_hum = false;
@@ -165,7 +164,7 @@ void AIShell::check_columns() {
 				}
 
 				if (last_AI) {
-					p_AIscore += 1;
+					p_AIscore += 2;
 				}
 
 				last_AI = true;
@@ -173,7 +172,7 @@ void AIShell::check_columns() {
 
 			else if (current == -1) {
 				human_counter += 1;
-				p_Humscore += 1;
+				p_Humscore += 2;
 
 				if (AI_counter < k) {
 					last_AI = false;
@@ -182,7 +181,7 @@ void AIShell::check_columns() {
 				}
 
 				if (last_hum) {
-					p_Humscore += 1;
+					p_Humscore += 2;
 				}
 
 				last_hum = true;
@@ -229,7 +228,7 @@ void AIShell::check_rows() {
 			in_a_row.pop_back();
 			if (current == 1) {
 				AI_counter += 1;
-				p_AIscore += 1;
+				p_AIscore += 2;
 
 				if (human_counter < k) {
 					last_hum = false;
@@ -238,7 +237,7 @@ void AIShell::check_rows() {
 				}
 
 				if (last_AI) {
-					p_AIscore += 1;
+					p_AIscore += 2;
 				}
 
 				last_AI = true;
@@ -246,7 +245,7 @@ void AIShell::check_rows() {
 
 			else if (current == -1) {
 				human_counter += 1;
-				p_Humscore += 1;
+				p_Humscore += 2;
 
 				if (AI_counter < k) {
 					last_AI = false;
@@ -255,7 +254,7 @@ void AIShell::check_rows() {
 				}
 
 				if (last_hum) {
-					p_Humscore += 1;
+					p_Humscore += 2;
 				}
 
 				last_hum = true;
