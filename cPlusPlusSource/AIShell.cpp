@@ -139,6 +139,7 @@ void AIShell::check_columns() {
 	int size;
 	int counter;
 	int temp_counter;
+	
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
@@ -153,6 +154,9 @@ void AIShell::check_columns() {
 				in_a_row.push_back(gameState[i][j + s]);
 
 				if (s <= (k - 1)) {
+					int* num1 = &in_a_row[0];
+					int* num2 = &in_a_row[1];
+
 					size = in_a_row.size();
 					if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end() && std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
 						AI_score += 0;
@@ -162,7 +166,7 @@ void AIShell::check_columns() {
 					else if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end()) {
 
 						for (int i = 0; i < size; i++){
-							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+							if (*num1 == *num2 && (*num1 == 1)) {
 								temp_counter++;
 								if (temp_counter > counter) {
 									counter = temp_counter;
@@ -171,6 +175,8 @@ void AIShell::check_columns() {
 							else{
 								temp_counter = 1;
 							}
+							num1++;
+							num2++;
 
 						}
 						AI_score += (counter * 5);
@@ -179,7 +185,7 @@ void AIShell::check_columns() {
 
 					else if (std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
 						for (int i = 0; i < size; i++) {
-							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == -1)) {
+							if (*num1 == *num2 && (*num1 == -1)) {
 								temp_counter++;
 								if (temp_counter > counter) {
 									counter = temp_counter;
@@ -188,6 +194,8 @@ void AIShell::check_columns() {
 							else {
 								temp_counter = 1;
 							}
+							num1++;
+							num2++;
 
 						}
 						Human_score += (counter * 5);
@@ -224,6 +232,8 @@ void AIShell::check_rows() {
 				in_a_row.push_back(gameState[j + s][i]);
 
 				if (s <= (k - 1)) {
+					int* num1 = &in_a_row[0];
+					int* num2 = &in_a_row[1];
 					size = in_a_row.size();
 					if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end() && std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
 						AI_score += 0;
@@ -233,7 +243,7 @@ void AIShell::check_rows() {
 					else if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end()) {
 
 						for (int i = 0; i < size; i++) {
-							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+							if (*num1 == *num2 && (*num1 == 1)) {
 								temp_counter++;
 								if (temp_counter > counter) {
 									counter = temp_counter;
@@ -242,6 +252,8 @@ void AIShell::check_rows() {
 							else {
 								temp_counter = 1;
 							}
+							num1++;
+							num2++;
 
 						}
 						AI_score += (counter * 5);
@@ -249,7 +261,7 @@ void AIShell::check_rows() {
 
 					else if (std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
 						for (int i = 0; i < size; i++) {
-							if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == -1)) {
+							if (*num1 == *num2 && (*num1 == 1)) {
 								temp_counter++;
 								if (temp_counter > counter) {
 									counter = temp_counter;
@@ -258,6 +270,8 @@ void AIShell::check_rows() {
 							else {
 								temp_counter = 1;
 							}
+							num1++;
+							num2++;
 
 						}
 						Human_score += (counter * 5);
