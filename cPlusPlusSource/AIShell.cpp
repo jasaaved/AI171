@@ -163,7 +163,8 @@ void AIShell::check_columns() {
 						}
 							
 						else {
-								AI_score+=sum_of_elems;
+							AI_score++;
+							AI_score = AI_score*sum_of_elems;
 						}
 					}
 
@@ -176,7 +177,8 @@ void AIShell::check_columns() {
 							}
 								
 							else {
-									Human_score+=sum_of_elems;
+								Human_score++;
+								Human_score = Human_score*sum_of_elems;
 							}
 						}
 					}
@@ -189,8 +191,6 @@ void AIShell::check_columns() {
 
 void AIShell::check_rows() {
 	int sum_of_elems = 0;
-
-
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
 			sum_of_elems = 0;
@@ -218,7 +218,8 @@ void AIShell::check_rows() {
 						}
 
 						else {
-							AI_score+=sum_of_elems;
+							AI_score++;
+							AI_score = AI_score*sum_of_elems;
 						}
 					}
 
@@ -231,7 +232,8 @@ void AIShell::check_rows() {
 							}
 
 							else {
-								Human_score+=sum_of_elems;
+								Human_score++;
+								Human_score = Human_score*sum_of_elems;
 							}
 						}
 					}
