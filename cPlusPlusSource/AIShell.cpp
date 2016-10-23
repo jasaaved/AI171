@@ -27,7 +27,7 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-	int max = -100;
+	int max = -100000000;
 	int col = 0;
 	int row = 0;
 
@@ -50,14 +50,14 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int d) {
-	int min = 1000;
+	int min = 100000000;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
-					if (possible <= min) {
+					if (possible < min) {
 						min = possible;
 					}
 					gameState[i][j] = NO_PIECE;
@@ -72,7 +72,7 @@ int AIShell::FindMin(int d) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(d - 1);
-				if (possible <= min) {
+				if (possible < min) {
 					min = possible;
 				}
 				gameState[i][j] = NO_PIECE;
@@ -84,14 +84,14 @@ int AIShell::FindMin(int d) {
 }
 
 int AIShell::FindMax(int d) {
-	int max = -1000;
+	int max = -100000000;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = AI_PIECE;
 					int possible = score();
-					if (possible >= max) {
+					if (possible > max) {
 						max = possible;
 					}
 					gameState[i][j] = NO_PIECE;
@@ -105,8 +105,8 @@ int AIShell::FindMax(int d) {
 		for (int j = 0; j < numRows; j++) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = AI_PIECE;
-				int possible = FindMax(d - 1);
-				if (possible >= max) {
+				int possible = FindMin(d - 1);
+				if (possible > max) {
 					max = possible;
 				}
 				gameState[i][j] = NO_PIECE;
@@ -163,8 +163,7 @@ void AIShell::check_columns() {
 						}
 							
 						else {
-							AI_score++;
-							AI_score = AI_score*sum_of_elems;
+								AI_score+=sum_of_elems;
 						}
 					}
 
@@ -177,8 +176,7 @@ void AIShell::check_columns() {
 							}
 								
 							else {
-								Human_score++;
-								Human_score = Human_score*sum_of_elems;
+									Human_score+=sum_of_elems;
 							}
 						}
 					}
@@ -191,6 +189,8 @@ void AIShell::check_columns() {
 
 void AIShell::check_rows() {
 	int sum_of_elems = 0;
+
+
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
 			sum_of_elems = 0;
@@ -218,8 +218,7 @@ void AIShell::check_rows() {
 						}
 
 						else {
-							AI_score++;
-							AI_score = AI_score*sum_of_elems;
+							AI_score+=sum_of_elems;
 						}
 					}
 
@@ -232,8 +231,7 @@ void AIShell::check_rows() {
 							}
 
 							else {
-								Human_score++;
-								Human_score = Human_score*sum_of_elems;
+								Human_score+=sum_of_elems;
 							}
 						}
 					}
