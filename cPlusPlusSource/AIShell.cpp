@@ -163,7 +163,7 @@ void AIShell::check_columns() {
 						}
 							
 						else {
-								AI_score++;
+								AI_score+=sum_of_elems;
 						}
 					}
 
@@ -176,7 +176,7 @@ void AIShell::check_columns() {
 							}
 								
 							else {
-									Human_score++;
+									Human_score+=sum_of_elems;
 							}
 						}
 					}
@@ -218,7 +218,7 @@ void AIShell::check_rows() {
 						}
 
 						else {
-							AI_score++;
+							AI_score+=sum_of_elems;
 						}
 					}
 
@@ -231,7 +231,7 @@ void AIShell::check_rows() {
 							}
 
 							else {
-								Human_score++;
+								Human_score+=sum_of_elems;
 							}
 						}
 					}
