@@ -136,23 +136,26 @@ int AIShell::score() {
 
 void AIShell::check_columns() {
 	std::vector<int> in_a_row;
-	int size;
 	int AI_counter;
 	int current;
 	int human_counter;
 	int p_AIscore;
 	int p_Humscore;
-	bool last_AI = false;
-	bool last_hum = false;
+	bool last_AI;
+	bool last_hum;
 	
 
 	for (int i = 0; i < numCols; i++) {
+		AI_counter = 0;
+		human_counter = 0;
+		p_AIscore = 0;
+		p_Humscore = 0;
+		last_AI = false;
+		last_hum = false;
 		for (int j = 0; j < numRows; j++) {
 			in_a_row.push_back(gameState[i][j]);
 		}
-		for (auto i = in_a_row.begin(); i != in_a_row.end(); ++i)
-			std::cout << *i << ' ';
-		std::cout << std::endl;
+
 		while (!in_a_row.empty()) {
 			current = in_a_row.back();
 			in_a_row.pop_back();
@@ -212,17 +215,22 @@ void AIShell::check_columns() {
 
 void AIShell::check_rows() {
 	std::vector<int> in_a_row;
-	int size;
 	int AI_counter;
 	int current;
 	int human_counter;
 	int p_AIscore;
 	int p_Humscore;
-	bool last_AI = false;
-	bool last_hum = false;
+	bool last_AI;
+	bool last_hum;
 
 
 	for (int i = 0; i < numRows; i++) {
+		AI_counter = 0;
+		human_counter = 0;
+		p_AIscore = 0;
+		p_Humscore = 0;
+		last_AI = false;
+		last_hum = false;
 		for (int j = 0; j < numCols; j++) {
 			in_a_row.push_back(gameState[j][i]);
 		}
