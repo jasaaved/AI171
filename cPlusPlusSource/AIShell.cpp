@@ -136,25 +136,24 @@ int AIShell::score() {
 void AIShell::check_columns() {
 	int temp_AI = 0;
 	int temp_Hum = 0;
-	int sum_of_elems = 0;
-	std::vector<int> current;
+	int sum_of_elems;
+
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
+			sum_of_elems = 0;
 			for (int s = 0; s < k; s++) {
 				if (s + j >= numRows) {
-					current.clear();
 					break;
 				}
-				current.push_back(gameState[i][j + s]);
-				if (s = (k - 1)) {
-					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
-						break;
-					}
-					for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it) {
-						sum_of_elems += *it;
-					}
-					current.clear();
+				if (gameState[i][j + s] == 1 && sum_of_elems >= 0) {
+					sum_of_elems++;
+				}
+				if (gameState[i][j + s] == -1 && sum_of_elems <= 0) {
+					sum_of_elems--;
+				}
+				if (s == (k-1)) {
+
 					if (sum_of_elems == 0) {
 						temp_AI++;
 						temp_Hum++;
@@ -199,24 +198,23 @@ void AIShell::check_rows() {
 	bool AI_control = false;
 	bool Hum_control = false;
 	int sum_of_elems = 0;
-	std::vector<int> current;
+
 
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
+			sum_of_elems = 0;
 			for (int s = 0; s < k; s++) {
 				if (s + j >= numCols) {
-					current.clear();
 					break;
 				}
-				current.push_back(gameState[j + s][i]);
-				if (s = (k - 1)) {
-					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
-						break;
-					}
-					for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it) {
-						sum_of_elems += *it;
-					}
-					current.clear();
+				if (gameState[j + s][i] == 1 && sum_of_elems >= 0) {
+					sum_of_elems++;
+				}
+				if (gameState[j + s][i] == -1 && sum_of_elems <= 0) {
+					sum_of_elems--;
+				}
+				if (s == (k - 1)) {
+
 					if (sum_of_elems == 0) {
 						temp_AI++;
 						temp_Hum++;

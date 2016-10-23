@@ -92,7 +92,7 @@ AIShell* makeAIShellFromInput(){
 				shell->depth = 4;
 			}
 			if (!gravity){
-				shell->depth = 3;
+				shell->depth = 2;
 			}  
 
 			return shell;
