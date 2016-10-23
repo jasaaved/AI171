@@ -1,6 +1,7 @@
 #include "AIShell.h"
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <stdlib.h>
 #include <vector>
 
@@ -135,31 +136,30 @@ int AIShell::score() {
 
 void AIShell::check_columns() {
 	int sum_of_elems;
+	std::vector<int> in_a_row;
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
 			sum_of_elems = 0;
 			for (int s = 0; s < k; s++) {
 				if (s + j >= numRows) {
+					in_a_row.clear();
 					break;
 				}
-				if (gameState[i][j + s] == 1 && sum_of_elems >= 0) {
-					sum_of_elems++;
-				}
-				if (gameState[i][j + s] == -1 && sum_of_elems <= 0) {
-					sum_of_elems--;
-				}
+				in_a_row.push_back(gameState[i][j + s]);
 				if (s == (k-1)) {
 
-					if (sum_of_elems == 0) {
-						AI_score++;
-						Human_score++;
+					if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end() && std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
+						AI_score += 0;
+						Human_score += 0;
 					}
 						
-					else if (sum_of_elems >= 1) {
-							
+					else if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end()) {
+						
+						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
+
 						if (sum_of_elems == k) {
-								AI_score = 100;
+								AI_score = 100000000;
 						}
 							
 						else {
@@ -167,19 +167,28 @@ void AIShell::check_columns() {
 						}
 					}
 
-					else {
-							
+					else if(std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
+						
+						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
+
 						if (sum_of_elems <= -1) {
 								
 							if (sum_of_elems == -k) {
-									Human_score = 100;
+									Human_score = 100000000;
 							}
 								
 							else {
-									Human_score+=sum_of_elems;
+									Human_score+=(-sum_of_elems);
 							}
 						}
 					}
+
+					else {
+						AI_score++;
+						Human_score++;
+					}
+
+					in_a_row.clear();
 				}
 			}
 		}
@@ -188,53 +197,59 @@ void AIShell::check_columns() {
 
 
 void AIShell::check_rows() {
-	int sum_of_elems = 0;
-
+	int sum_of_elems;
+	std::vector<int> in_a_row;
 
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
 			sum_of_elems = 0;
 			for (int s = 0; s < k; s++) {
 				if (s + j >= numCols) {
+					in_a_row.clear();
 					break;
 				}
-				if (gameState[j + s][i] == 1 && sum_of_elems >= 0) {
-					sum_of_elems++;
-				}
-				if (gameState[j + s][i] == -1 && sum_of_elems <= 0) {
-					sum_of_elems--;
-				}
+				in_a_row.push_back(gameState[j + s][i]);
 				if (s == (k - 1)) {
 
-					if (sum_of_elems == 0) {
-						AI_score++;
-						Human_score++;
+					if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end() && std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
+						AI_score += 0;
+						Human_score += 0;
 					}
 
-					else if (sum_of_elems >= 1) {
+					else if (std::find(in_a_row.begin(), in_a_row.end(), 1) != in_a_row.end()) {
+
+						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
 
 						if (sum_of_elems == k) {
-							AI_score = 100;
+							AI_score = 100000000;
 						}
 
 						else {
-							AI_score+=sum_of_elems;
+							AI_score += sum_of_elems;
 						}
 					}
 
-					else {
+					else if (std::find(in_a_row.begin(), in_a_row.end(), -1) != in_a_row.end()) {
+
+						sum_of_elems = std::accumulate(in_a_row.begin(), in_a_row.end(), 0);
 
 						if (sum_of_elems <= -1) {
 
 							if (sum_of_elems == -k) {
-								Human_score = 100;
+								Human_score = 100000000;
 							}
 
 							else {
-								Human_score+=sum_of_elems;
+								Human_score += (-sum_of_elems);
 							}
 						}
 					}
+
+					else {
+						AI_score++;
+						Human_score++;
+					}
+					in_a_row.clear();
 				}
 			}
 		}
