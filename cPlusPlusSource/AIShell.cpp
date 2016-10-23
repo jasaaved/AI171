@@ -174,7 +174,7 @@ void AIShell::check_columns() {
 
 						}
 						if (counter == k) {
-							AI_score += 1000;
+							AI_score += 100000000;
 						}
 						else {
 							AI_score += counter;
@@ -196,7 +196,7 @@ void AIShell::check_columns() {
 
 						}
 						if (counter == k) {
-							Human_score += 1000;
+							Human_score += 100000000;
 						}
 						else {
 							Human_score += counter;
@@ -255,7 +255,7 @@ void AIShell::check_rows() {
 
 						}
 						if (counter == k) {
-							AI_score += 1000;
+							AI_score += 100000000;
 						}
 						else {
 							AI_score += counter;
@@ -276,7 +276,7 @@ void AIShell::check_rows() {
 
 						}
 						if (counter == k) {
-							Human_score += 1000;
+							Human_score += 100000000;
 						}
 						else {
 							Human_score += counter;
