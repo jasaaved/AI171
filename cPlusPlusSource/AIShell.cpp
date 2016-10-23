@@ -350,7 +350,7 @@ void AIShell::check_rdiagonals() {
 		last_AI = false;
 		last_hum = false;
 		for (int j = 0; j + (k - 1) <= numRows; j++) {
-			for (int s = 1; s < k; s++)
+			for (int s = 1; (s + i) < numCols && (s + j) < numRows; s++)
 				in_a_row.push_back(gameState[i + s][j + s]);
 		}
 
