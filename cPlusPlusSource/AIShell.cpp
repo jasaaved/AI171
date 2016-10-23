@@ -134,6 +134,7 @@ void AIShell::check_columns(int* AI_score, int* Human_score) {
 	int temp_Hum = 0;
 	bool AI_control = false;
 	bool Hum_control = false;
+	int sum_of_elems = 0;
 	std::vector<int> current;
 
 	for (int i = 0; i < numCols; i++) {
@@ -145,19 +146,34 @@ void AIShell::check_columns(int* AI_score, int* Human_score) {
 				}
 				current.push_back(gameState[i][j + s]);
 				if (s = (k - 1)) {
-					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) == current.end()) {
-						temp_AI++;
-					}
+					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
+						for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it)
+							sum_of_elems += *it;
+						current.clear();
+						if (sum_of_elems == 0) {
+							temp_AI++;
+							temp_Hum++;
+						}
+						else if (sum_of_elems >= 1) {
+							if (sum_of_elems == k) {
+								temp_AI = 100;
+							}
+							else {
+								temp_AI++;
+							}
+						}
 
-					else if (std::find(current.begin(), current.end(), -1) != current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
-						temp_Hum++;
+						else {
+							if (sum_of_elems <= -1) {
+								if (sum_of_elems == -k) {
+									temp_AI = 100;
+								}
+								else {
+									temp_AI++;
+								}
+							}
+						}
 					}
-
-					else if (std::find(current.begin(), current.end(), -1) == current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
-						temp_Hum++;
-						temp_AI++;
-					}
-					current.clear();
 				}
 			}
 		}
@@ -171,6 +187,7 @@ void AIShell::check_rows(int* AI_score, int* Human_score) {
 	int temp_Hum = 0;
 	bool AI_control = false;
 	bool Hum_control = false;
+	int sum_of_elems = 0;
 	std::vector<int> current;
 
 	for (int i = 0; i < numRows; i++) {
@@ -182,19 +199,34 @@ void AIShell::check_rows(int* AI_score, int* Human_score) {
 				}
 				current.push_back(gameState[j + s][i]);
 				if (s = (k - 1)) {
-					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) == current.end()) {
-						temp_AI++;
-					}
+					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
+						for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it)
+							sum_of_elems += *it;
+						current.clear();
+						if (sum_of_elems == 0) {
+							temp_AI++;
+							temp_Hum++;
+						}
+						else if (sum_of_elems >= 1) {
+							if (sum_of_elems == k) {
+								temp_AI = 100;
+							}
+							else {
+								temp_AI++;
+							}
+						}
 
-					else if (std::find(current.begin(), current.end(), -1) != current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
-						temp_Hum++;
+						else {
+							if (sum_of_elems <= -1) {
+								if (sum_of_elems == -k) {
+									temp_AI = 100;
+								}
+								else {
+									temp_AI++;
+								}
+							}
+						}
 					}
-
-					else if (std::find(current.begin(), current.end(), -1) == current.end() && std::find(current.begin(), current.end(), 1) == current.end()) {
-						temp_Hum++;
-						temp_AI++;
-					}
-					current.clear();
 				}
 			}
 		}
