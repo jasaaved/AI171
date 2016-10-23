@@ -179,7 +179,7 @@ void AIShell::check_columns() {
 				}
 
 				if (AI_row == k) {
-					p_AIscore = 1000;
+					p_AIscore = 10000;
 					break;
 				}
 
@@ -276,7 +276,7 @@ void AIShell::check_rows() {
 				}
 
 				if (AI_row == k) {
-					p_AIscore = 1000;
+					p_AIscore = 10000;
 					break;
 				}
 
