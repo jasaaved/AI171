@@ -36,8 +36,10 @@ public:
 	Move minimax(int d);
 	int FindMax(int d);
 	int FindMin(int d);
-	int heuristic(int m);
 	int score();
+	void check_rows(int* AI_score, int* Human_score);
+	void check_columns(int *AI_score, int* Human_score);
+	void check_diagonals(int *AI_score, int* Human_score);
 };
 
 #endif //AISHELL_H
