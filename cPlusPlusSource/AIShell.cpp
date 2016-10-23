@@ -169,7 +169,7 @@ void AIShell::check_columns() {
 							static int *num2 = &in_a_row[1];
 							for (int n = 0; n<size; n++)
 							{
-								if (*num1 == *num2) counter++;
+								if (*num1 == *num2 && *num1 == 1) counter++;
 								else
 								{
 									counter = 1;
@@ -198,7 +198,7 @@ void AIShell::check_columns() {
 								static int *num2 = &in_a_row[1];
 								for (int n = 0; n<size; n++)
 								{
-									if (*num1 == *num2) counter++;
+									if (*num1 == *num2 && *num1 == -1) counter++;
 									else
 									{
 										counter = 1;
