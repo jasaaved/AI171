@@ -40,7 +40,7 @@ public:
 	int score();
 	void check_rows();
 	void check_columns();
-	void check_diagonals();
+	void check_rdiagonals();
 };
 
 #endif //AISHELL_H

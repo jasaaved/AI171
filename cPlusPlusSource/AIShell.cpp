@@ -124,11 +124,7 @@ int AIShell::score() {
 
 	check_columns();
 	check_rows();
-	//check_diagonals(&AI_score, &Human_score);
-
-	std::cout << AI_score << std::endl;
-	std::cout << Human_score << std::endl;
-	std::cout << std::endl;
+	check_rdiagonals();
 
 	return (AI_score - Human_score);
 
@@ -182,6 +178,8 @@ void AIShell::check_columns() {
 					p_AIscore = 1000;
 					break;
 				}
+
+				last_AI = true;
 
 			}
 
@@ -280,6 +278,8 @@ void AIShell::check_rows() {
 					break;
 				}
 
+				last_AI = true;
+
 			}
 
 			else if (current == -1) {
@@ -327,7 +327,103 @@ void AIShell::check_rows() {
 
 
 
-void AIShell::check_diagonals() {
+void AIShell::check_rdiagonals() {
+	std::vector<int> in_a_row;
+	int AI_counter;
+	int current;
+	int AI_row;
+	int Hum_row;
+	int human_counter;
+	int p_AIscore;
+	int p_Humscore;
+	bool last_AI;
+	bool last_hum;
+
+
+	for (int i = 0; (i + (k-1)) <= numCols; i++) {
+		AI_counter = 0;
+		human_counter = 0;
+		p_AIscore = 0;
+		p_Humscore = 0;
+		AI_row = 0;
+		Hum_row = 0;
+		last_AI = false;
+		last_hum = false;
+		for (int j = 0; j + (k - 1) <= numRows; j++) {
+			for (int s = 1; s < k; s++)
+				in_a_row.push_back(gameState[i + s][j + s]);
+		}
+
+		while (!in_a_row.empty()) {
+			current = in_a_row.back();
+			in_a_row.pop_back();
+			if (current == 1) {
+				AI_counter += 1;
+				AI_row += 1;
+
+				if (human_counter < k) {
+					last_hum = false;
+					human_counter = 0;
+					p_Humscore = 0;
+					Hum_row = 0;
+				}
+
+				if (AI_row != k) {
+					p_AIscore += (5 * AI_row);
+				}
+
+				if (AI_row == k) {
+					p_AIscore = 1000;
+					break;
+				}
+
+				last_AI = true;
+
+			}
+
+			else if (current == -1) {
+				human_counter += 1;
+				Hum_row += 1;
+
+				if (AI_counter < k) {
+					last_AI = false;
+					AI_counter = 0;
+					p_AIscore = 0;
+					AI_row = 0;
+
+				}
+
+				if (Hum_row != k) {
+					p_Humscore += (5 * Hum_row);
+				}
+
+				if (Hum_row == k) {
+					p_Humscore = 10000;
+					break;
+				}
+
+				last_hum = true;
+			}
+
+			else {
+				if (last_hum) {
+					human_counter += 1;
+					p_Humscore += 1;
+					Hum_row = 0;
+				}
+
+				if (last_AI) {
+					AI_counter += 1;
+					p_AIscore += 1;
+					AI_row = 0;
+				}
+			}
+		}
+		AI_score += p_AIscore;
+		Human_score += p_Humscore;
+	}
+
+
 
 }
 
