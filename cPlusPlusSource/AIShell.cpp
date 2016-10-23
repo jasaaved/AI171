@@ -125,6 +125,10 @@ int AIShell::score() {
 	check_rows(&AI_score, &Human_score);
 	//check_diagonals(&AI_score, &Human_score);
 
+	std::cout << AI_score << std::endl;
+	std::cout << Human_score << std::endl;
+	std::cout << std::endl;
+
 	return (AI_score - Human_score);
 
 }
@@ -147,40 +151,49 @@ void AIShell::check_columns(int* AI_score, int* Human_score) {
 				current.push_back(gameState[i][j + s]);
 				if (s = (k - 1)) {
 					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
-						for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it)
-							sum_of_elems += *it;
-						current.clear();
-						if (sum_of_elems == 0) {
-							temp_AI++;
-							temp_Hum++;
-						}
-						else if (sum_of_elems >= 1) {
-							if (sum_of_elems == k) {
+						break;
+					}
+					for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it) {
+						sum_of_elems += *it;
+					}
+					current.clear();
+					if (sum_of_elems == 0) {
+						temp_AI++;
+						temp_Hum++;
+					}
+						
+					else if (sum_of_elems >= 1) {
+							
+						if (sum_of_elems == k) {
 								temp_AI = 100;
-							}
-							else {
-								temp_AI++;
-							}
 						}
-
+							
 						else {
-							if (sum_of_elems <= -1) {
-								if (sum_of_elems == -k) {
+								temp_AI++;
+						}
+					}
+
+					else {
+							
+						if (sum_of_elems <= -1) {
+								
+							if (sum_of_elems == -k) {
 									temp_AI = 100;
-								}
-								else {
+							}
+								
+							else {
 									temp_AI++;
-								}
 							}
 						}
 					}
 				}
 			}
 		}
+	}
 		*AI_score += temp_AI;
 		*Human_score += temp_Hum;
-	}
 }
+
 
 void AIShell::check_rows(int* AI_score, int* Human_score) {
 	int temp_AI = 0;
@@ -197,42 +210,50 @@ void AIShell::check_rows(int* AI_score, int* Human_score) {
 					current.clear();
 					break;
 				}
-				current.push_back(gameState[j + s][i]);
+				current.push_back(gameState[i][j + s]);
 				if (s = (k - 1)) {
 					if (std::find(current.begin(), current.end(), 1) != current.end() && std::find(current.begin(), current.end(), -1) != current.end()) {
-						for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it)
-							sum_of_elems += *it;
-						current.clear();
-						if (sum_of_elems == 0) {
-							temp_AI++;
-							temp_Hum++;
-						}
-						else if (sum_of_elems >= 1) {
-							if (sum_of_elems == k) {
-								temp_AI = 100;
-							}
-							else {
-								temp_AI++;
-							}
+						break;
+					}
+					for (std::vector<int>::iterator it = current.begin(); it != current.end(); ++it) {
+						sum_of_elems += *it;
+					}
+					current.clear();
+					if (sum_of_elems == 0) {
+						temp_AI++;
+						temp_Hum++;
+					}
+
+					else if (sum_of_elems >= 1) {
+
+						if (sum_of_elems == k) {
+							temp_AI = 100;
 						}
 
 						else {
-							if (sum_of_elems <= -1) {
-								if (sum_of_elems == -k) {
-									temp_AI = 100;
-								}
-								else {
-									temp_AI++;
-								}
+							temp_AI++;
+						}
+					}
+
+					else {
+
+						if (sum_of_elems <= -1) {
+
+							if (sum_of_elems == -k) {
+								temp_AI = 100;
+							}
+
+							else {
+								temp_AI++;
 							}
 						}
 					}
 				}
 			}
 		}
-		*AI_score += temp_AI;
-		*Human_score += temp_Hum;
 	}
+	*AI_score += temp_AI;
+	*Human_score += temp_Hum;
 }
 
 void AIShell::check_diagonals(int* AI_score, int* Human_score) {
