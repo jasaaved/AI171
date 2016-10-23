@@ -118,8 +118,8 @@ int AIShell::FindMax(int d) {
 }
 
 int AIShell::score() {
-	int AI_score = 0;
-	int Human_score = 0;
+	AI_score = 0;
+	Human_score = 0;
 
 	check_columns(&AI_score, &Human_score);
 	check_rows(&AI_score, &Human_score);
