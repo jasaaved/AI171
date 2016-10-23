@@ -137,10 +137,15 @@ int AIShell::score() {
 void AIShell::check_columns() {
 	int sum_of_elems;
 	std::vector<int> in_a_row;
+	int size;
+	int counter;
+	int temp_counter;
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
 			sum_of_elems = 0;
+			counter = 1;
+			temp_counter = 1;
 			for (int s = 0; s < k; s++) {
 				if (s + j >= numRows) {
 					in_a_row.clear();
@@ -163,19 +168,20 @@ void AIShell::check_columns() {
 						}
 							
 						else {
-							int size = in_a_row.size() - 1;
-							static int counter = 1;
-							static int *num1 = &in_a_row[0];
-							static int *num2 = &in_a_row[1];
-							for (int n = 0; n<size; n++)
+							size = in_a_row.size() - 1;
+							for (int i = 0; i < size; i++)
 							{
-								if (*num1 == *num2 && *num1 == 1) counter++;
+								if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+									temp_counter++;
+									if (temp_counter >= counter) {
+										counter = temp_counter;
+									}
+								}
 								else
 								{
-									counter = 1;
+									temp_counter = 1;
 								}
-								num1++;
-								num2++;
+
 							}
 							AI_score += counter;
 						}
@@ -192,19 +198,20 @@ void AIShell::check_columns() {
 							}
 								
 							else {
-								int size = in_a_row.size() - 1;
-								static int counter = 1;
-								static int *num1 = &in_a_row[0];
-								static int *num2 = &in_a_row[1];
-								for (int n = 0; n<size; n++)
+								size = in_a_row.size() - 1;
+								for (int i = 0; i < size; i++)
 								{
-									if (*num1 == *num2 && *num1 == -1) counter++;
+									if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+										temp_counter++;
+										if (temp_counter >= counter) {
+											counter = temp_counter;
+										}
+									}
 									else
 									{
-										counter = 1;
+										temp_counter = 1;
 									}
-									num1++;
-									num2++;
+
 								}
 								Human_score += counter;
 							}
@@ -227,6 +234,9 @@ void AIShell::check_columns() {
 void AIShell::check_rows() {
 	int sum_of_elems;
 	std::vector<int> in_a_row;
+	int size;
+	int counter;
+	int temp_counter;
 
 	for (int i = 0; i < numRows; i++) {
 		for (int j = 0; j < numCols; j++) {
@@ -253,19 +263,20 @@ void AIShell::check_rows() {
 						}
 
 						else {
-							int size = in_a_row.size() - 1;
-							static int counter = 1;
-							static int *num1 = &in_a_row[0];
-							static int *num2 = &in_a_row[1];
-							for (int n = 0; n<size; n++)
+							size = in_a_row.size() - 1;
+							for (int i = 0; i < size; i++)
 							{
-								if (*num1 == *num2 && *num1 == 1) counter++;
+								if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+									temp_counter++;
+									if (temp_counter >= counter) {
+										counter = temp_counter;
+									}
+								}
 								else
 								{
-									counter = 1;
+									temp_counter = 1;
 								}
-								num1++;
-								num2++;
+
 							}
 							AI_score += counter;
 						}
@@ -282,19 +293,20 @@ void AIShell::check_rows() {
 							}
 
 							else {
-								int size = in_a_row.size() - 1;
-								static int counter = 1;
-								static int *num1 = &in_a_row[0];
-								static int *num2 = &in_a_row[1];
-								for (int n = 0; n<size; n++)
+								size = in_a_row.size() - 1;
+								for (int i = 0; i < size; i++)
 								{
-									if (*num1 == *num2 && *num1 == -1) counter++;
+									if (in_a_row[i] == in_a_row[i + 1] && (in_a_row[i] == 1)) {
+										temp_counter++;
+										if (temp_counter >= counter) {
+											counter = temp_counter;
+										}
+									}
 									else
 									{
-										counter = 1;
+										temp_counter = 1;
 									}
-									num1++;
-									num2++;
+
 								}
 								Human_score += counter;
 							}
