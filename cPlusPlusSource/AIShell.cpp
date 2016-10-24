@@ -125,7 +125,7 @@ int AIShell::score() {
 	check_columns();
 	check_rows();
 	check_rdiagonals();
-	check_ldiagonals();
+	//check_ldiagonals();
 
 	return (AI_score - Human_score);
 
