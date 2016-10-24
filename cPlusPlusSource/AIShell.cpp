@@ -125,7 +125,7 @@ int AIShell::score() {
 	check_columns();
 	check_rows();
 	check_rdiagonals();
-	//check_ldiagonals();
+	check_ldiagonals();
 
 	return (AI_score - Human_score);
 
@@ -452,77 +452,75 @@ void AIShell::check_ldiagonals() {
 		for (int j = 0; j <= (numRows - k); j++) {
 			for (int s = 0; s < k; s++)
 				in_a_row.push_back(gameState[i - s][j + s]);
-		}
-
-		while (!in_a_row.empty()) {
-			current = in_a_row.back();
-			in_a_row.pop_back();
-			if (current == 1) {
-				AI_counter += 1;
-				AI_row += 1;
-
-				if (human_counter < k) {
-					last_hum = false;
-					human_counter = 0;
-					p_Humscore = 0;
-					Hum_row = 0;
-				}
-
-				if (AI_row != k) {
-					p_AIscore += (5 * AI_row);
-				}
-
-				if (AI_row == k) {
-					p_AIscore = 1000;
-					break;
-				}
-
-				last_AI = true;
-
-			}
-
-			else if (current == -1) {
-				human_counter += 1;
-				Hum_row += 1;
-
-				if (AI_counter < k) {
-					last_AI = false;
-					AI_counter = 0;
-					p_AIscore = 0;
-					AI_row = 0;
-
-				}
-
-				if (Hum_row != k) {
-					p_Humscore += (5 * Hum_row);
-				}
-
-				if (Hum_row == k) {
-					p_Humscore = 10000;
-					break;
-				}
-
-				last_hum = true;
-			}
-
-			else {
-				if (last_hum) {
-					human_counter += 1;
-					p_Humscore += 1;
-					Hum_row = 0;
-				}
-
-				if (last_AI) {
+			while (!in_a_row.empty()) {
+				current = in_a_row.back();
+				in_a_row.pop_back();
+				if (current == 1) {
 					AI_counter += 1;
-					p_AIscore += 1;
-					AI_row = 0;
+					AI_row += 1;
+
+					if (human_counter < k) {
+						last_hum = false;
+						human_counter = 0;
+						p_Humscore = 0;
+						Hum_row = 0;
+					}
+
+					if (AI_row != k) {
+						p_AIscore += (5 * AI_row);
+					}
+
+					if (AI_row == k) {
+						p_AIscore = 1000;
+						break;
+					}
+
+					last_AI = true;
+
+				}
+
+				else if (current == -1) {
+					human_counter += 1;
+					Hum_row += 1;
+
+					if (AI_counter < k) {
+						last_AI = false;
+						AI_counter = 0;
+						p_AIscore = 0;
+						AI_row = 0;
+
+					}
+
+					if (Hum_row != k) {
+						p_Humscore += (5 * Hum_row);
+					}
+
+					if (Hum_row == k) {
+						p_Humscore = 10000;
+						break;
+					}
+
+					last_hum = true;
+				}
+
+				else {
+					if (last_hum) {
+						human_counter += 1;
+						p_Humscore += 1;
+						Hum_row = 0;
+					}
+
+					if (last_AI) {
+						AI_counter += 1;
+						p_AIscore += 1;
+						AI_row = 0;
+					}
 				}
 			}
+			AI_score += p_AIscore;
+			Human_score += p_Humscore;
 		}
-		AI_score += p_AIscore;
-		Human_score += p_Humscore;
 	}
-
 }
 
 
