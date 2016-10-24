@@ -125,7 +125,7 @@ int AIShell::score() {
 	check_columns();
 	check_rows();
 	check_rdiagonals();
-	check_ldiagonals();
+	//check_ldiagonals();
 
 	return (AI_score - Human_score);
 
@@ -351,7 +351,7 @@ void AIShell::check_rdiagonals() {
 		last_AI = false;
 		last_hum = false;
 		for (int j = 0; j <= (numRows - k); j++) {
-			for (int s = 0; (s + i) <= (numCols - 1) && (s + j) <= (numRows - i); s++)
+			for (int s = 0; s < k; s++)
 				in_a_row.push_back(gameState[i + s][j + s]);
 		}
 
