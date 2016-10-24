@@ -438,7 +438,7 @@ void AIShell::check_ldiagonals() {
 	bool last_hum;
 
 
-	for (int i = numCols - 1; i >= (numCols - k) + 1; i--) {
+	for (int i = numCols - 1; i >= (numCols - k); i--) {
 		AI_counter = 0;
 		human_counter = 0;
 		p_AIscore = 0;
