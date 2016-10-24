@@ -41,6 +41,7 @@ public:
 	void check_rows();
 	void check_columns();
 	void check_rdiagonals();
+	void check_ldiagonals();
 };
 
 #endif //AISHELL_H
