@@ -449,7 +449,7 @@ void AIShell::check_ldiagonals() {
 		last_hum = false;
 
 		for (int j = 0; j <= (numRows - k); j++) {
-			for (int s = 0; (s + i) <= (numCols - 1) && (s + j) <= (numRows - i); s++)
+			for (int s = 0; (i - s) >= 0 && (s + j) <= (numRows - i); s++)
 				in_a_row.push_back(gameState[i - s][j + s]);
 		}
 
