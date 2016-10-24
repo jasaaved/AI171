@@ -341,7 +341,7 @@ void AIShell::check_rdiagonals() {
 	bool last_hum;
 
 
-	for (int i = 0; (i + (k-1)) <= numCols; i++) {
+	for (int i = 0; i <= (numCols - k); i++) {
 		AI_counter = 0;
 		human_counter = 0;
 		p_AIscore = 0;
@@ -350,8 +350,8 @@ void AIShell::check_rdiagonals() {
 		Hum_row = 0;
 		last_AI = false;
 		last_hum = false;
-		for (int j = 0; j + (k - 1) <= numRows; j++) {
-			for (int s = 1; (s + i) < numCols && (s + j) < numRows; s++)
+		for (int j = 0; j <= (numRows - k); j++) {
+			for (int s = 0; (s + i) <= (numCols - k) && (s + j) <= (numRows - k); s++)
 				in_a_row.push_back(gameState[i + s][j + s]);
 		}
 
@@ -438,7 +438,7 @@ void AIShell::check_ldiagonals() {
 	bool last_hum;
 
 
-	for (int i = numCols; i >= (numCols - k); i--) {
+	for (int i = numCols - 1; i >= (numCols - k) + 1; i--) {
 		AI_counter = 0;
 		human_counter = 0;
 		p_AIscore = 0;
@@ -447,8 +447,9 @@ void AIShell::check_ldiagonals() {
 		Hum_row = 0;
 		last_AI = false;
 		last_hum = false;
+
 		for (int j = 0; j <= (numRows - k); j++) {
-			for (int s = 1; (i - s) > 0 && (s + j) < numRows; s++)
+			for (int s = 0; (i - s) >= (numCols - k) && (s + j) <= (numRows - k); s++)
 				in_a_row.push_back(gameState[i - s][j + s]);
 		}
 
