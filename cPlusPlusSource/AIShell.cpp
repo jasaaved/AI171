@@ -51,7 +51,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int d) {
-	int min = 100000000;
+	int min = 99999999999999;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -73,6 +73,9 @@ int AIShell::FindMin(int d) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(d - 1);
+				if (min != 99999999999999 && possible <= min) {
+					return min;
+				}
 				if (possible < min) {
 					min = possible;
 				}
@@ -85,7 +88,7 @@ int AIShell::FindMin(int d) {
 }
 
 int AIShell::FindMax(int d) {
-	int max = -100000000;
+	int max = -99999999999999;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -107,6 +110,9 @@ int AIShell::FindMax(int d) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(d - 1);
+				if (max != -99999999999999 && possible >= max) {
+					return max;
+				}
 				if (possible > max) {
 					max = possible;
 				}
