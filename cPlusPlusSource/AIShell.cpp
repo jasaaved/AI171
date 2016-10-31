@@ -28,7 +28,9 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-	int max = -100000000;
+	int max = -999999999;
+	alpha = -999999999;
+	beta = 999999999;
 	int col = 0;
 	int row = 0;
 
@@ -51,17 +53,24 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int d) {
-	int min = 99999999999999;
+	int min = 999999999;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
+					gameState[i][j] = NO_PIECE;
+
 					if (possible < min) {
 						min = possible;
+						beta = possible;
 					}
-					gameState[i][j] = NO_PIECE;
+					
+					if (alpha >= possible) {
+						beta = min;
+						return min;
+					}
 				}
 			}
 		}
@@ -73,22 +82,26 @@ int AIShell::FindMin(int d) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(d - 1);
-				if (min != 99999999999999 && possible <= min) {
-					return min;
-				}
+
 				if (possible < min) {
 					min = possible;
+					beta = min;
 				}
 				gameState[i][j] = NO_PIECE;
+				if (alpha >= beta) {
+					beta = 999999999;
+					return min;
+
+				}
 			}
 		}
 	}
-
+	beta = 999999999;
 	return min;
 }
 
 int AIShell::FindMax(int d) {
-	int max = -99999999999999;
+	int max = -999999999;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -97,8 +110,13 @@ int AIShell::FindMax(int d) {
 					int possible = score();
 					if (possible > max) {
 						max = possible;
+						alpha = max;
 					}
 					gameState[i][j] = NO_PIECE;
+					if (alpha >= beta) {
+						alpha = max;
+						return max;
+					}
 				}
 			}
 		}
@@ -110,17 +128,22 @@ int AIShell::FindMax(int d) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(d - 1);
-				if (max != -99999999999999 && possible >= max) {
-					return max;
-				}
+				
 				if (possible > max) {
 					max = possible;
+					alpha = max;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
+
+			if (alpha >= beta) {
+				alpha = -999999999;
+				return max;
+
+			}
 		}
 	}
-
+	alpha = -999999999;
 	return max;
 }
 
