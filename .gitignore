@@ -1,7 +1,9 @@
 ./*.jar
 ./*.exe
 *.pyc
+*log
 AssignmentSubmission
+*.class
 
 
 .metadata

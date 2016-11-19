@@ -88,12 +88,14 @@ AIShell* makeAIShellFromInput(){
 			AIShell* shell = new AIShell (colCount, rowCount, gravity, gameState, m);
 			shell->deadline=deadline;
 			shell->k=k;
+			//change this
 			if (gravity){
 				shell->depth = 4;
 			}
 			if (!gravity){
 				shell->depth = 4;
 			}  
+			//
 
 			return shell;
 		}
