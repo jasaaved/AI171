@@ -28,7 +28,6 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-	int max = -INFINITY;
 	alpha = -INFINITY;
 	beta = INFINITY;
 	int col = 0;
@@ -66,7 +65,6 @@ int AIShell::FindMin(int d) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
 					gameState[i][j] = NO_PIECE;
-					possible = score();
 					if (beta < possible) {
 						min = possible;
 						beta = possible;
@@ -179,11 +177,10 @@ int AIShell::FindMax(int d) {
 int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
-
 	check_columns();
 	check_rows();
-	check_rdiagonals();
-	check_ldiagonals();
+	//check_rdiagonals();
+	//check_ldiagonals();
 
 	return (AI_score - Human_score);
 
@@ -259,8 +256,15 @@ void AIShell::check_columns() {
 				}
 
 				if (Hum_row == k) {
-					p_Humscore = 10000;
-					break;
+					p_Humscore = INFINITY;
+					Human_score = INFINITY;
+					return;
+				}
+
+				if (Hum_row == k-1) {
+					p_Humscore = INFINITY;
+					Human_score = INFINITY;
+					return;
 				}
 
 				last_hum = true;
@@ -273,10 +277,19 @@ void AIShell::check_columns() {
 					Hum_row = 0;
 				}
 
-				if (last_AI) {
+				else if (last_AI) {
 					AI_counter += 1;
 					p_AIscore += 1;
 					AI_row = 0;
+				}
+
+				else {
+					AI_counter += 1;
+					p_AIscore += 1;
+					AI_row = 0;
+					human_counter += 1;
+					p_Humscore += 1;
+					Hum_row = 0;
 				}
 			}
 		}
@@ -358,8 +371,15 @@ void AIShell::check_rows() {
 				}
 
 				if (Hum_row == k) {
-					p_Humscore = 10000;
-					break;
+					p_Humscore = INFINITY;
+					Human_score = INFINITY;
+					return;
+				}
+
+				if (Hum_row == k-1) {
+					p_Humscore = INFINITY;
+					Human_score = INFINITY;
+					return;
 				}
 
 				last_hum = true;
@@ -372,10 +392,19 @@ void AIShell::check_rows() {
 					Hum_row = 0;
 				}
 
-				if (last_AI) {
+				else if (last_AI) {
 					AI_counter += 1;
 					p_AIscore += 1;
 					AI_row = 0;
+				}
+
+				else {
+					AI_counter += 1;
+					p_AIscore += 1;
+					AI_row = 0;
+					human_counter += 1;
+					p_Humscore += 1;
+					Hum_row = 0;
 				}
 			}
 		}
