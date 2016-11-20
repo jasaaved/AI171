@@ -41,10 +41,7 @@ public:
 	int FindMax(int alpha, int beta, int d);
 	int FindMin(int alpha, int beta, int d);
 	int score();
-	void check_rows();
-	void check_columns();
-	void check_rdiagonals();
-	void check_ldiagonals();
+	void winning_spaces();
 };
 
 #endif //AISHELL_H

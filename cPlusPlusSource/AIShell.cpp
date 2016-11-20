@@ -146,17 +146,24 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
-	check_columns();
-	check_rows();
-	check_rdiagonals();
-	check_ldiagonals();
+	winning_spaces();
+	if (AI_score = INF) 
+	{
+		return INF;
+	}
+
+	if (Human_score = INF)
+	{
+		return -INF;
+	}
 
 	return (AI_score - Human_score);
 
 }
 
-void AIShell::check_columns() {
-	std::vector<int> in_a_row;
+
+void AIShell::winning_spaces() 
+{
 	int AI_counter;
 	int current;
 	int AI_row;
@@ -166,449 +173,417 @@ void AIShell::check_columns() {
 	int p_Humscore;
 	bool last_AI;
 	bool last_hum;
-	
+	int count;
 
-	for (int i = 0; i < numCols; i++) {
-		AI_counter = 0;
-		human_counter = 0;
-		p_AIscore = 0;
-		p_Humscore = 0;
-		AI_row = 0;
-		Hum_row = 0;
-		last_AI = false;
-		last_hum = false;
-		for (int j = 0; j < numRows; j++) {
-			in_a_row.push_back(gameState[i][j]);
-		}
+	for (int i = 0; i < numCols; ++i) {
+		for (int j = 0; j < numRows; ++j) {
 
-		while (!in_a_row.empty()) {
-			current = in_a_row.back();
-			in_a_row.pop_back();
-			if (current == 1) {
-				AI_counter += 1;
-				AI_row += 1;
-
-				if (human_counter < k) {
-					last_hum = false;
-					human_counter = 0;
-					p_Humscore = 0;
-					Hum_row = 0;
-				}
-
-				if (AI_row != k) {
-					p_AIscore += (5 * AI_row);
-				}
-
-				if (AI_row == k) {
-					p_AIscore = 1000;
+			if (gameState[i][j] == 0) {
+				if (gravityOn)
 					break;
-				}
-
-				last_AI = true;
-
+				else
+					continue;
 			}
+			count = 0;
+			AI_counter = 0;
+			human_counter = 0;
+			p_AIscore = 0;
+			p_Humscore = 0;
+			AI_row = 0;
+			Hum_row = 0;
+			last_AI = false;
+			last_hum = false;
+			while (i + count < numCols)
+			{
+				if (gameState[i + count][j] == 0)
+				{
+					if (!last_AI && !last_hum)
+					{
+						AI_counter += 1;
+						human_counter += 1;
+					}
 
-			else if (current == -1) {
-				human_counter += 1;
-				Hum_row += 1;
+					else if (last_AI)
+					{
+					     AI_counter += 1;
+					}
 
-				if (AI_counter < k) {
-					last_AI = false;
-					AI_counter = 0;
-					p_AIscore = 0;
-					AI_row = 0;
-
-				}
-
-				if (Hum_row != k) {
-					p_Humscore += (5 * Hum_row);
-				}
-
-				if (Hum_row == k) {
-					//p_Humscore = 100000;
-					Human_score = INF;
-					return;
-				}
-
-				if (Hum_row == k-1) {
-					//p_Humscore = 100000;
-					Human_score = INF;
-					return;
-				}
-
-				last_hum = true;
-			}
-
-			else {
-				if (last_hum) {
-					human_counter += 1;
-					p_Humscore += 1;
-					Hum_row = 0;
-				}
-
-				else if (last_AI) {
-					AI_counter += 1;
-					p_AIscore += 1;
-					AI_row = 0;
-				}
-
-				else {
-					AI_counter += 1;
-					p_AIscore += 1;
-					AI_row = 0;
-					human_counter += 1;
-					p_Humscore += 1;
-					Hum_row = 0;
-				}
-			}
-		}
-		AI_score += p_AIscore;
-		Human_score += p_Humscore;
-	}
-}
-
-
-
-
-void AIShell::check_rows() {
-	std::vector<int> in_a_row;
-	int AI_counter;
-	int current;
-	int AI_row;
-	int Hum_row;
-	int human_counter;
-	int p_AIscore;
-	int p_Humscore;
-	bool last_AI;
-	bool last_hum;
-
-
-	for (int i = 0; i < numRows; i++) {
-		AI_counter = 0;
-		human_counter = 0;
-		p_AIscore = 0;
-		p_Humscore = 0;
-		AI_row = 0;
-		Hum_row = 0;
-		last_AI = false;
-		last_hum = false;
-		for (int j = 0; j < numCols; j++) {
-			in_a_row.push_back(gameState[j][i]);
-		}
-
-		while (!in_a_row.empty()) {
-			current = in_a_row.back();
-			in_a_row.pop_back();
-			if (current == 1) {
-				AI_counter += 1;
-				AI_row += 1;
-
-				if (human_counter < k) {
-					last_hum = false;
-					human_counter = 0;
-					p_Humscore = 0;
-					Hum_row = 0;
-				}
-
-				if (AI_row != k) {
-					p_AIscore += (5 * AI_row);
-				}
-
-				if (AI_row == k) {
-					p_AIscore = 1000;
-					break;
-				}
-
-				last_AI = true;
-
-			}
-
-			else if (current == -1) {
-				human_counter += 1;
-				Hum_row += 1;
-
-				if (AI_counter < k) {
-					last_AI = false;
-					AI_counter = 0;
-					p_AIscore = 0;
-					AI_row = 0;
+					else
+					{
+						human_counter += 1;
+					}
 
 				}
 
-				if (Hum_row != k) {
-					p_Humscore += (5 * Hum_row);
-				}
-
-				if (Hum_row == k) {
-					//p_Humscore = 100000;
-					Human_score = INF;
-					return;
-				}
-
-				if (Hum_row == k-1) {
-					//p_Humscore = 100000;
-					Human_score = INF;
-					return;
-				}
-
-				last_hum = true;
-			}
-
-			else {
-				if (last_hum) {
-					human_counter += 1;
-					p_Humscore += 1;
-					Hum_row = 0;
-				}
-
-				else if (last_AI) {
-					AI_counter += 1;
-					p_AIscore += 1;
-					AI_row = 0;
-				}
-
-				else {
-					AI_counter += 1;
-					p_AIscore += 1;
-					AI_row = 0;
-					human_counter += 1;
-					p_Humscore += 1;
-					Hum_row = 0;
-				}
-			}
-		}
-		AI_score += p_AIscore;
-		Human_score += p_Humscore;
-	}
-}
-
-
-
-void AIShell::check_rdiagonals() {
-	std::vector<int> in_a_row;
-	int AI_counter;
-	int current;
-	int AI_row;
-	int Hum_row;
-	int human_counter;
-	int p_AIscore;
-	int p_Humscore;
-	bool last_AI;
-	bool last_hum;
-
-
-	for (int i = 0; i <= (numCols - k); i++) {
-		AI_counter = 0;
-		human_counter = 0;
-		p_AIscore = 0;
-		p_Humscore = 0;
-		AI_row = 0;
-		Hum_row = 0;
-		last_AI = false;
-		last_hum = false;
-		for (int j = 0; j <= (numRows - k); j++) {
-			for (int s = 0; s < k; s++) {
-				in_a_row.push_back(gameState[i + s][j + s]);
-			}
-
-			while (!in_a_row.empty()) {
-				current = in_a_row.back();
-				in_a_row.pop_back();
-				if (current == 1) {
+				if (gameState[i + count][j] == 1)
+				{
 					AI_counter += 1;
 					AI_row += 1;
+					last_hum = false;
 
-					if (human_counter < k) {
-						last_hum = false;
+					if (human_counter < k) 
+					{
 						human_counter = 0;
 						p_Humscore = 0;
 						Hum_row = 0;
 					}
 
-					if (AI_row != k) {
+					if (AI_row != k) 
+					{
 						p_AIscore += (5 * AI_row);
 					}
 
-					if (AI_row == k) {
-						p_AIscore = 1000;
-						break;
+					if (AI_row == k) 
+					{
+						AI_score = INF;
+						return;
 					}
 
 					last_AI = true;
-
 				}
 
-				else if (current == -1) {
+				if (gameState[i + count][j] == -1)
+				{
 					human_counter += 1;
 					Hum_row += 1;
+					last_AI = false;
 
-					if (AI_counter < k) {
-						last_AI = false;
+					if (AI_counter < k)
+					{
 						AI_counter = 0;
 						p_AIscore = 0;
 						AI_row = 0;
-
 					}
 
-					if (Hum_row != k) {
+					if (Hum_row != k) 
+					{
 						p_Humscore += (5 * Hum_row);
 					}
 
-					if (Hum_row == k -1 ) {
-						//p_Humscore = 100000;
+					if (Hum_row == k) 
+					{
 						Human_score = INF;
 						return;
 					}
 
-					if (Hum_row == k) {
-						//p_Humscore = 100000;
+					if (Hum_row == k - 1)
+					{
 						Human_score = INF;
 						return;
 					}
 
 					last_hum = true;
+
 				}
 
-				else {
-					if (last_hum) {
-						human_counter += 1;
-						p_Humscore += 1;
-						Hum_row = 0;
-					}
-
-					else if (last_AI) {
-						AI_counter += 1;
-						p_AIscore += 1;
-						AI_row = 0;
-					}
-
-					else {
-						AI_counter += 1;
-						p_AIscore += 1;
-						AI_row = 0;
-						human_counter += 1;
-						p_Humscore += 1;
-						Hum_row = 0;
-					}
-				}
+				++count;
 			}
+
 			AI_score += p_AIscore;
 			Human_score += p_Humscore;
-		}
-	}
-}
 
-void AIShell::check_ldiagonals() {
-	std::vector<int> in_a_row;
-	int AI_counter;
-	int current;
-	int AI_row;
-	int Hum_row;
-	int human_counter;
-	int p_AIscore;
-	int p_Humscore;
-	bool last_AI;
-	bool last_hum;
+			count = 0;
+			AI_counter = 0;
+			human_counter = 0;
+			p_AIscore = 0;
+			p_Humscore = 0;
+			AI_row = 0;
+			Hum_row = 0;
+			last_AI = false;
+			last_hum = false;
 
+			while (i + count < numCols && j + count < numRows) 
+			{
+				if (gameState[i + count][j + count] == 0)
+				{
+					if (!last_AI && !last_hum)
+					{
+						AI_counter += 1;
+						human_counter += 1;
+					}
 
-	for (int i = numCols - 1; i >= (numCols - k); i--) {
-		AI_counter = 0;
-		human_counter = 0;
-		p_AIscore = 0;
-		p_Humscore = 0;
-		AI_row = 0;
-		Hum_row = 0;
-		last_AI = false;
-		last_hum = false;
+					else if (last_AI)
+					{
+						AI_counter += 1;
+					}
 
-		for (int j = 0; j <= (numRows - k); j++) {
-			for (int s = 0; s < k; s++)
-				in_a_row.push_back(gameState[i - s][j + s]);
-			while (!in_a_row.empty()) {
-				current = in_a_row.back();
-				in_a_row.pop_back();
-				if (current == 1) {
+					else
+					{
+						human_counter += 1;
+					}
+
+				}
+
+				if (gameState[i + count][j + count] == 1)
+				{
 					AI_counter += 1;
 					AI_row += 1;
+					last_hum = false;
 
-					if (human_counter < k) {
-						last_hum = false;
+					if (human_counter < k)
+					{
 						human_counter = 0;
 						p_Humscore = 0;
 						Hum_row = 0;
 					}
 
-					if (AI_row != k) {
+					if (AI_row != k)
+					{
 						p_AIscore += (5 * AI_row);
 					}
 
-					if (AI_row == k) {
-						p_AIscore = 1000;
-						break;
+					if (AI_row == k)
+					{
+						AI_score = INF;
+						return;
 					}
 
 					last_AI = true;
-
 				}
 
-				else if (current == -1) {
+				if (gameState[i + count][j + count] == -1)
+				{
 					human_counter += 1;
 					Hum_row += 1;
+					last_AI = false;
 
-					if (AI_counter < k) {
-						last_AI = false;
+					if (AI_counter < k)
+					{
 						AI_counter = 0;
 						p_AIscore = 0;
 						AI_row = 0;
-
 					}
 
-					if (Hum_row != k) {
+					if (Hum_row != k)
+					{
 						p_Humscore += (5 * Hum_row);
 					}
 
-					if (Hum_row == k - 1) {
-						//p_Humscore = 100000;
+					if (Hum_row == k)
+					{
 						Human_score = INF;
 						return;
 					}
 
-					if (Hum_row == k) {
-						//p_Humscore = 100000;
+					if (Hum_row == k - 1)
+					{
 						Human_score = INF;
 						return;
 					}
 
 					last_hum = true;
+
 				}
 
-				else {
-					if (last_hum) {
-						human_counter += 1;
-						p_Humscore += 1;
-						Hum_row = 0;
-					}
-
-					else if (last_AI) {
-						AI_counter += 1;
-						p_AIscore += 1;
-						AI_row = 0;
-					}
-
-					else {
-						AI_counter += 1;
-						p_AIscore += 1;
-						AI_row = 0;
-						human_counter += 1;
-						p_Humscore += 1;
-						Hum_row = 0;
-					}
-				}
+				++count;
 			}
+
 			AI_score += p_AIscore;
 			Human_score += p_Humscore;
+
+			count = 0;
+			AI_counter = 0;
+			human_counter = 0;
+			p_AIscore = 0;
+			p_Humscore = 0;
+			AI_row = 0;
+			Hum_row = 0;
+			last_AI = false;
+			last_hum = false;
+
+			while (i + count < numCols && j - count >= 0)
+			{
+				if (gameState[i + count][j - count] == 0)
+				{
+					if (!last_AI && !last_hum)
+					{
+						AI_counter += 1;
+						human_counter += 1;
+					}
+
+					else if (last_AI)
+					{
+						AI_counter += 1;
+					}
+
+					else
+					{
+						human_counter += 1;
+					}
+
+				}
+
+				if (gameState[i + count][j - count] == 1)
+				{
+					AI_counter += 1;
+					AI_row += 1;
+					last_hum = false;
+
+					if (human_counter < k)
+					{
+						human_counter = 0;
+						p_Humscore = 0;
+						Hum_row = 0;
+					}
+
+					if (AI_row != k)
+					{
+						p_AIscore += (5 * AI_row);
+					}
+
+					if (AI_row == k)
+					{
+						AI_score = INF;
+						return;
+					}
+
+					last_AI = true;
+				}
+
+				if (gameState[i + count][j - count] == -1)
+				{
+					human_counter += 1;
+					Hum_row += 1;
+					last_AI = false;
+
+					if (AI_counter < k)
+					{
+						AI_counter = 0;
+						p_AIscore = 0;
+						AI_row = 0;
+					}
+
+					if (Hum_row != k)
+					{
+						p_Humscore += (5 * Hum_row);
+					}
+
+					if (Hum_row == k)
+					{
+						Human_score = INF;
+						return;
+					}
+
+					if (Hum_row == k - 1)
+					{
+						Human_score = INF;
+						return;
+					}
+
+					last_hum = true;
+
+				}
+
+				++count;
+
+			}
+
+			AI_score += p_AIscore;
+			Human_score += p_Humscore;
+
+			count = 0;
+			AI_counter = 0;
+			human_counter = 0;
+			p_AIscore = 0;
+			p_Humscore = 0;
+			AI_row = 0;
+			Hum_row = 0;
+			last_AI = false;
+			last_hum = false;
+
+			while (j + count < numRows)
+			{
+				if (gameState[i][j + count] == 0)
+				{
+					if (!last_AI && !last_hum)
+					{
+						AI_counter += 1;
+						human_counter += 1;
+					}
+
+					else if (last_AI)
+					{
+						AI_counter += 1;
+					}
+
+					else
+					{
+						human_counter += 1;
+					}
+
+				}
+
+				if (gameState[i][j + count] == 1)
+				{
+					AI_counter += 1;
+					AI_row += 1;
+					last_hum = false;
+
+					if (human_counter < k)
+					{
+						human_counter = 0;
+						p_Humscore = 0;
+						Hum_row = 0;
+					}
+
+					if (AI_row != k)
+					{
+						p_AIscore += (5 * AI_row);
+					}
+
+					if (AI_row == k)
+					{
+						AI_score = INF;
+						return;
+					}
+
+					last_AI = true;
+				}
+
+				if (gameState[i][j + count] == -1)
+				{
+					human_counter += 1;
+					Hum_row += 1;
+					last_AI = false;
+
+					if (AI_counter < k)
+					{
+						AI_counter = 0;
+						p_AIscore = 0;
+						AI_row = 0;
+					}
+
+					if (Hum_row != k)
+					{
+						p_Humscore += (5 * Hum_row);
+					}
+
+					if (Hum_row == k)
+					{
+						Human_score = INF;
+						return;
+					}
+
+					if (Hum_row == k - 1)
+					{
+						Human_score = INF;
+						return;
+					}
+
+					last_hum = true;
+
+				}
+
+				++count;
+			}
+
+			AI_score += p_AIscore;
+			Human_score += p_Humscore;
+
 		}
 	}
+					
+
 }
 
 
