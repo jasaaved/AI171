@@ -46,6 +46,7 @@ Move AIShell::minimax(int d) {
 					alpha = possible;
 					col = i;
 					row = j;
+					std::cout << "column: " << i << "row: " << j << std::endl;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
@@ -148,15 +149,7 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	check_columns();
-	if (Human_score == INFINITY)
-	{
-		return -INFINITY;
-	}
 	check_rows();
-	if (Human_score == INFINITY)
-	{
-		return -INFINITY;
-	}
 	//check_rdiagonals();
 	//check_ldiagonals();
 
@@ -234,13 +227,15 @@ void AIShell::check_columns() {
 				}
 
 				if (Hum_row == k) {
-					Human_score = INFINITY;
-					return;
+					p_Humscore = 100000;
+					//Human_score = INFINITY;
+					break;
 				}
 
 				if (Hum_row == k-1) {
-					Human_score = INFINITY;
-					return;
+					p_Humscore = 100000;
+					//Human_score = INFINITY;
+					break;
 				}
 
 				last_hum = true;
@@ -347,13 +342,15 @@ void AIShell::check_rows() {
 				}
 
 				if (Hum_row == k) {
-					Human_score = INFINITY;
-					return;
+					p_Humscore = 100000;
+					//Human_score = INFINITY;
+					break;
 				}
 
 				if (Hum_row == k-1) {
-					Human_score = INFINITY;
-					return;
+					p_Humscore = 100000;
+					//Human_score = INFINITY;
+					break;
 				}
 
 				last_hum = true;
