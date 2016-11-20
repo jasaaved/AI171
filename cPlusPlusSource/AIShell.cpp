@@ -148,15 +148,6 @@ int AIShell::score() {
 	Human_score = 0;
 	winning_spaces();
 	std::cout << "AI score:  " << AI_score << "Hum score: " << Human_score << std::endl;
-	if (AI_score = INF) 
-	{
-		return INF;
-	}
-
-	if (Human_score = INF)
-	{
-		return -INF;
-	}
 
 	return (AI_score - Human_score);
 
