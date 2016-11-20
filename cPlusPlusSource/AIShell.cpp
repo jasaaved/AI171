@@ -75,7 +75,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				}
 			}
 		}
-
+		std::cout << "Beta: " << beta << std::endl;
 		return beta;
 	}
 	
