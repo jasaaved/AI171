@@ -229,13 +229,13 @@ void AIShell::check_columns() {
 
 				if (Hum_row == k) {
 					//p_Humscore = 100000;
-					Human_score = INF;
+					Human_score = 555555;
 					return;
 				}
 
 				if (Hum_row == k-1) {
 					//p_Humscore = 100000;
-					Human_score = INF;
+					Human_score = 555555;
 					return;
 				}
 
@@ -344,13 +344,13 @@ void AIShell::check_rows() {
 
 				if (Hum_row == k) {
 					//p_Humscore = 100000;
-					Human_score = INF;
+					Human_score = 55555;
 					return;
 				}
 
 				if (Hum_row == k-1) {
 					//p_Humscore = 100000;
-					Human_score = INF;
+					Human_score = 55555;
 					return;
 				}
 
