@@ -56,7 +56,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
-	//std::cout << "MIN ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
+	std::cout << "MIN ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -93,7 +93,6 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				gameState[i][j] = NO_PIECE;
 
 				if (alpha >= beta) {
-					std::cout << "Alpha:  " << alpha << " Beta: " << beta << std::endl;
 					return beta;
 				}
 			}
