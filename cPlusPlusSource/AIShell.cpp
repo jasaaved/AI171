@@ -93,6 +93,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				gameState[i][j] = NO_PIECE;
 
 				if (alpha >= beta) {
+					std::cout << "Alpha:  " << alpha << " Beta: " << beta << std::endl;
 					return beta;
 				}
 			}
@@ -103,7 +104,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 }
 
 int AIShell::FindMax(int alpha, int beta, int d) {
-	std::cout << "MAX ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
+	//std::cout << "MAX ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -129,13 +130,16 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(alpha, beta, d - 1);
-				std::cout << "i: " << i << "j: " << j << std::endl;
 				if (possible > alpha) {
 					alpha = possible;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
 
+			if (alpha >= beta) {
+				return alpha;
+
+			}
 		}
 	}
 
