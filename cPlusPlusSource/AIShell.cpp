@@ -56,20 +56,17 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
-	std::cout << "MIN ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
-					std::cout << possible << " " << beta <<  " " << bool(beta < possible) << std::endl;
+					
 					gameState[i][j] = NO_PIECE;
 
-					if (beta < possible) {
-
+					if (possible < beta) {
 						beta = possible;
-						std::cout << "YES: " << beta << std::endl;
 					}
 					
 					if (alpha >= beta) {
@@ -78,7 +75,6 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				}
 			}
 		}
-		std::cout << "Beta: " << beta << std::endl;
 		return beta;
 	}
 	
@@ -89,7 +85,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				int possible = FindMax(alpha, beta, d - 1);
 
 
-				if (beta < possible) {
+				if (possible < beta) {
 					beta = possible;
 				}
 
