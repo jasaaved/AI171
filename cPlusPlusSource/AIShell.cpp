@@ -194,6 +194,8 @@ void AIShell::winning_spaces()
 				{
 					AI_row = 0;
 					Hum_row = 0;
+					p_AIscore = 0;
+					p_Humscore = 0;
 				}
 
 				if (gameState[i + count][j] == 1)
@@ -255,6 +257,8 @@ void AIShell::winning_spaces()
 					
 						AI_row = 0;
 						Hum_row = 0;
+						p_AIscore = 0;
+						p_Humscore = 0;
 
 				}
 
@@ -317,6 +321,8 @@ void AIShell::winning_spaces()
 					
 						AI_row = 0;
 						Hum_row = 0;
+						p_AIscore = 0;
+						p_Humscore = 0;
 
 				}
 
@@ -383,6 +389,8 @@ void AIShell::winning_spaces()
 				{
 						AI_row = 0;
 						Hum_row = 0;
+						p_AIscore = 0;
+						p_Humscore = 0;
 				}
 
 				if (gameState[i][j + count] == 1)
