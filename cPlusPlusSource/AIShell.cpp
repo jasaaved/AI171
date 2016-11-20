@@ -193,16 +193,20 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						AI_row = 0;
+						Hum_row = 0;
 					}
 
 					else if (last_AI)
 					{
 					     AI_counter += 1;
+						 AI_row = 0;
 					}
 
 					else
 					{
 						human_counter += 1;
+						Hum_row = 0;
 					}
 
 				}
@@ -295,16 +299,20 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						AI_row = 0;
+						Hum_row = 0;
 					}
 
 					else if (last_AI)
 					{
 						AI_counter += 1;
+						AI_row = 0;
 					}
 
 					else
 					{
 						human_counter += 1;
+						Hum_row = 0;
 					}
 
 				}
@@ -397,16 +405,20 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						AI_row = 0;
+						Hum_row = 0;
 					}
 
 					else if (last_AI)
 					{
 						AI_counter += 1;
+						AI_row = 0;
 					}
 
 					else
 					{
 						human_counter += 1;
+						Hum_row = 0;
 					}
 
 				}
@@ -500,16 +512,20 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						AI_row = 0;
+						Hum_row = 0;
 					}
 
 					else if (last_AI)
 					{
 						AI_counter += 1;
+						AI_row = 0;
 					}
 
 					else
 					{
 						human_counter += 1;
+						Hum_row = 0;
 					}
 
 				}
