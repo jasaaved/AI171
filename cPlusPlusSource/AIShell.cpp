@@ -102,7 +102,6 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 }
 
 int AIShell::FindMax(int alpha, int beta, int d) {
-	//std::cout << "MAX ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -227,13 +226,13 @@ void AIShell::check_columns() {
 
 				if (Hum_row == k) {
 					//p_Humscore = 100000;
-					Human_score = 555555;
+					Human_score = INF;
 					return;
 				}
 
 				if (Hum_row == k-1) {
 					//p_Humscore = 100000;
-					Human_score = 555555;
+					Human_score = INF;
 					return;
 				}
 
@@ -342,13 +341,13 @@ void AIShell::check_rows() {
 
 				if (Hum_row == k) {
 					//p_Humscore = 100000;
-					Human_score = 55555;
+					Human_score = INF;
 					return;
 				}
 
 				if (Hum_row == k-1) {
 					//p_Humscore = 100000;
-					Human_score = 55555;
+					Human_score = INF;
 					return;
 				}
 
