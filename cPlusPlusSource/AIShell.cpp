@@ -148,8 +148,8 @@ int AIShell::score() {
 	Human_score = 0;
 	check_columns();
 	check_rows();
-	//check_rdiagonals();
-	//check_ldiagonals();
+	check_rdiagonals();
+	check_ldiagonals();
 
 	return (AI_score - Human_score);
 
