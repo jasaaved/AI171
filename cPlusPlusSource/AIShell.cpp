@@ -64,7 +64,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
-
+					std::cout << possible << std::endl;
 					gameState[i][j] = NO_PIECE;
 
 					if (beta < possible) {
