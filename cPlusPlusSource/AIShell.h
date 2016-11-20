@@ -13,6 +13,8 @@ public:
 	static const int AI_PIECE=1;
 	static const int HUMAN_PIECE = -1;
 	static const int NO_PIECE=0;
+	static const int INFINITY = 999999999;
+
 
 
 private:
@@ -27,6 +29,7 @@ private:
 	int Human_score;
 	int alpha;
 	int beta;
+	bool chosen;
 
 public:
 	int deadline; //this is how many milliseconds the AI has to make move.

@@ -96,7 +96,7 @@ AIShell* makeAIShellFromInput(){
 				shell->depth = 4;
 			}  
 			//
-
+			cout << "Last move column: " << lastMoveCol << "last move row: " << lastMoveRow << endl;
 			return shell;
 		}
 		else {
@@ -130,6 +130,7 @@ int main() {
 	Move moveMade = shell->makeMove();
 	returnMove(moveMade);
 	delete shell;
+	
 	}
 
 	return 0;

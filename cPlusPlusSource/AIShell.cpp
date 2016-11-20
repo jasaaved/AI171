@@ -28,21 +28,26 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-	int max = -999999999;
-	alpha = -999999999;
-	beta = 999999999;
+	int max = -INFINITY;
+	alpha = -INFINITY;
+	beta = INFINITY;
 	int col = 0;
 	int row = 0;
 
-	for (int i = 0; i < numCols; i++) {
-		for (int j = 0; j < numRows; j++) {
-			if (gameState[i][j] == NO_PIECE) {
+	for (int i = 0; i < numCols; i++) 
+	{
+		for (int j = 0; j < numRows; j++) 
+		{
+			if (gameState[i][j] == NO_PIECE) 
+			{
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(d - 1);
-				if (possible >= max) {
-					max = possible;
+				if (possible >= alpha) 
+				{
+					alpha = possible;
 					col = i;
 					row = j;
+					chosen = true;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
@@ -53,7 +58,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int d) {
-	int min = 999999999;
+	int min = INFINITY;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -61,19 +66,20 @@ int AIShell::FindMin(int d) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
 					gameState[i][j] = NO_PIECE;
-
-					if (possible < min) {
+					possible = score();
+					if (beta < possible) {
 						min = possible;
 						beta = possible;
 					}
 					
-					if (alpha >= possible) {
-						beta = min;
+					if (alpha >= beta) {
+						beta = INFINITY;
 						return min;
 					}
 				}
 			}
 		}
+		beta = INFINITY;
 		return min;
 	}
 	
@@ -83,42 +89,50 @@ int AIShell::FindMin(int d) {
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(d - 1);
 
-				if (possible < min) {
+				if (beta < possible) {
 					min = possible;
-					beta = min;
+					beta = possible;
 				}
 				gameState[i][j] = NO_PIECE;
 				if (alpha >= beta) {
-					beta = 999999999;
+					beta = INFINITY;
 					return min;
 
 				}
 			}
 		}
 	}
-	beta = 999999999;
+	beta = INFINITY;
 	return min;
 }
 
 int AIShell::FindMax(int d) {
-	int max = -999999999;
+	int max = -INFINITY;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = AI_PIECE;
 					int possible = score();
-					if (possible > max) {
+					if (possible > alpha) {
 						max = possible;
-						alpha = max;
+						alpha = possible;
 					}
 					gameState[i][j] = NO_PIECE;
 					if (alpha >= beta) {
-						alpha = max;
+						if (!chosen)
+						{
+							alpha = -INFINITY;
+						}
+						
 						return max;
 					}
 				}
 			}
+		}
+		if (!chosen)
+		{
+			alpha = -INFINITY;
 		}
 		return max;
 	}
@@ -129,21 +143,30 @@ int AIShell::FindMax(int d) {
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(d - 1);
 				
-				if (possible > max) {
+				if (possible > alpha) {
 					max = possible;
-					alpha = max;
+					alpha = possible;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
 
 			if (alpha >= beta) {
-				alpha = -999999999;
+
+				if (!chosen)
+				{
+					alpha = -INFINITY;
+				}
+
 				return max;
 
 			}
 		}
 	}
-	alpha = -999999999;
+
+	if (!chosen)
+	{
+		alpha = -INFINITY;
+	}
 	return max;
 }
 
@@ -558,18 +581,7 @@ void AIShell::check_ldiagonals() {
 
 
 
-Move AIShell::makeMove(){
-
-	return minimax(depth);
-
-	//int col = rand() % numCols;
-	//int row = rand() % numRows;
-
-	//while (gameState[col][row] != NO_PIECE){
-	//	col = rand() % numCols;
-	//	row = rand() % numRows;
-	//}
-	//Move m(col, row);
-	//return m;
-	 
+Move AIShell::makeMove()
+{
+	return minimax(depth);	 
 }
