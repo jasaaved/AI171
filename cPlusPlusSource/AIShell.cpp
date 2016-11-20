@@ -147,7 +147,7 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	winning_spaces();
-	std::cout << "AI score:  " << AI_score << "Hum score: " << Human_score << std::endl;
+	//std::cout << "AI score:  " << AI_score << "Hum score: " << Human_score << std::endl;
 
 	return (AI_score - Human_score);
 
@@ -254,13 +254,13 @@ void AIShell::winning_spaces()
 
 					if (Hum_row == k) 
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
 					if (Hum_row == k - 1)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
@@ -353,13 +353,13 @@ void AIShell::winning_spaces()
 
 					if (Hum_row == k)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
 					if (Hum_row == k - 1)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
@@ -452,13 +452,13 @@ void AIShell::winning_spaces()
 
 					if (Hum_row == k)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
 					if (Hum_row == k - 1)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
@@ -552,13 +552,13 @@ void AIShell::winning_spaces()
 
 					if (Hum_row == k)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
 					if (Hum_row == k - 1)
 					{
-						Human_score = INF;
+						Human_score = 500;
 						return;
 					}
 
