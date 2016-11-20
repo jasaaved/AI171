@@ -116,7 +116,10 @@ int AIShell::FindMax(int d) {
 					int possible = score();
 					if (possible > alpha) {
 						max = possible;
-						alpha = possible;
+						if (!chosen)
+						{
+							alpha = possible;
+						}
 					}
 					gameState[i][j] = NO_PIECE;
 					if (alpha >= beta) {
@@ -145,7 +148,10 @@ int AIShell::FindMax(int d) {
 				
 				if (possible > alpha) {
 					max = possible;
-					alpha = possible;
+					if (!chosen)
+					{
+						alpha = possible;
+					}
 				}
 				gameState[i][j] = NO_PIECE;
 			}
