@@ -13,7 +13,7 @@ public:
 	static const int AI_PIECE=1;
 	static const int HUMAN_PIECE = -1;
 	static const int NO_PIECE=0;
-	static const int INFINITY = 999999999;
+	static const int INF = 999999999;
 
 
 
