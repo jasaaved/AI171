@@ -454,9 +454,16 @@ void AIShell::check_rdiagonals() {
 						p_Humscore += (5 * Hum_row);
 					}
 
+					if (Hum_row == k -1 ) {
+						//p_Humscore = 100000;
+						Human_score = INF;
+						return;
+					}
+
 					if (Hum_row == k) {
-						p_Humscore = 10000;
-						break;
+						//p_Humscore = 100000;
+						Human_score = INF;
+						return;
 					}
 
 					last_hum = true;
@@ -469,10 +476,19 @@ void AIShell::check_rdiagonals() {
 						Hum_row = 0;
 					}
 
-					if (last_AI) {
+					else if (last_AI) {
 						AI_counter += 1;
 						p_AIscore += 1;
 						AI_row = 0;
+					}
+
+					else {
+						AI_counter += 1;
+						p_AIscore += 1;
+						AI_row = 0;
+						human_counter += 1;
+						p_Humscore += 1;
+						Hum_row = 0;
 					}
 				}
 			}
@@ -551,9 +567,16 @@ void AIShell::check_ldiagonals() {
 						p_Humscore += (5 * Hum_row);
 					}
 
+					if (Hum_row == k - 1) {
+						//p_Humscore = 100000;
+						Human_score = INF;
+						return;
+					}
+
 					if (Hum_row == k) {
-						p_Humscore = 10000;
-						break;
+						//p_Humscore = 100000;
+						Human_score = INF;
+						return;
 					}
 
 					last_hum = true;
@@ -566,10 +589,19 @@ void AIShell::check_ldiagonals() {
 						Hum_row = 0;
 					}
 
-					if (last_AI) {
+					else if (last_AI) {
 						AI_counter += 1;
 						p_AIscore += 1;
 						AI_row = 0;
+					}
+
+					else {
+						AI_counter += 1;
+						p_AIscore += 1;
+						AI_row = 0;
+						human_counter += 1;
+						p_Humscore += 1;
+						Hum_row = 0;
 					}
 				}
 			}
