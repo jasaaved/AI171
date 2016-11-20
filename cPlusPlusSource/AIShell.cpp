@@ -147,7 +147,16 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	winning_spaces();
-	std::cout << "score:  " << AI_score - Human_score << std::endl;
+	if(Human_score == 1000) 
+	{
+		return -1000;
+	}
+
+	if (AI_score == 1000)
+	{
+		return 1000;
+	}
+	//std::cout << "score:  " << AI_score - Human_score << std::endl;
 
 	return (AI_score - Human_score);
 
@@ -193,19 +202,23 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						p_Humscore += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 						Hum_row = 0;
 					}
 
-					else if (last_AI)
+					if (last_AI)
 					{
-					     AI_counter += 1;
-						 AI_row = 0;
+						AI_counter += 1;
+						p_AIscore += 1;
+						AI_row = 0;
 					}
 
-					else
+					if (last_hum)
 					{
 						human_counter += 1;
+						p_Humscore += 1;
 						Hum_row = 0;
 					}
 
@@ -217,22 +230,16 @@ void AIShell::winning_spaces()
 					AI_row += 1;
 					last_hum = false;
 
-					if (human_counter < k) 
-					{
-						human_counter = 0;
-						p_Humscore = 0;
-						Hum_row = 0;
-					}
+					human_counter = 0;
+					p_Humscore = 0;
+					Hum_row = 0;
 
-					if (AI_row != k) 
-					{
-						p_AIscore += (5 * AI_row);
-					}
+					p_AIscore += (5 * AI_row);
+
 
 					if (AI_row == k) 
 					{
-						AI_score = 500;
-						Human_score += p_Humscore;
+						AI_score = 1000;
 						return;
 					}
 
@@ -245,31 +252,24 @@ void AIShell::winning_spaces()
 					Hum_row += 1;
 					last_AI = false;
 
-					if (AI_counter < k)
-					{
-						AI_counter = 0;
-						p_AIscore = 0;
-						AI_row = 0;
-					}
+					AI_counter = 0;
+					p_AIscore = 0;
+					AI_row = 0;
 
-					if (Hum_row != k) 
-					{
-						p_Humscore += (5 * Hum_row);
-					}
+					p_Humscore += (5 * Hum_row);
 
 					if (Hum_row == k) 
 					{
 						Human_score = 1000;
-						AI_score += p_AIscore;
 						return;
 					}
-
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
-						AI_score += p_AIscore;
 						return;
 					}
+					*/
 
 					last_hum = true;
 
@@ -299,19 +299,23 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						p_Humscore += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 						Hum_row = 0;
 					}
 
-					else if (last_AI)
+					if (last_AI)
 					{
 						AI_counter += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 					}
 
-					else
+					if (last_hum)
 					{
 						human_counter += 1;
+						p_Humscore += 1;
 						Hum_row = 0;
 					}
 
@@ -323,22 +327,18 @@ void AIShell::winning_spaces()
 					AI_row += 1;
 					last_hum = false;
 
-					if (human_counter < k)
-					{
-						human_counter = 0;
-						p_Humscore = 0;
-						Hum_row = 0;
-					}
+					human_counter = 0;
+					p_Humscore = 0;
+					Hum_row = 0;
 
-					if (AI_row != k)
-					{
-						p_AIscore += (5 * AI_row);
-					}
+
+
+					p_AIscore += (5 * AI_row);
+
 
 					if (AI_row == k)
 					{
-						AI_score = 500;
-						Human_score += p_Humscore;
+						AI_score = 1000;
 						return;
 					}
 
@@ -351,31 +351,26 @@ void AIShell::winning_spaces()
 					Hum_row += 1;
 					last_AI = false;
 
-					if (AI_counter < k)
-					{
-						AI_counter = 0;
-						p_AIscore = 0;
-						AI_row = 0;
-					}
+					AI_counter = 0;
+					p_AIscore = 0;
+					AI_row = 0;
 
-					if (Hum_row != k)
-					{
-						p_Humscore += (5 * Hum_row);
-					}
+
+					p_Humscore += (5 * Hum_row);
 
 					if (Hum_row == k)
 					{
 						Human_score = 1000;
-						AI_score += p_AIscore;
 						return;
 					}
-
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
+					*/
 
 					last_hum = true;
 
@@ -405,19 +400,23 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						p_Humscore += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 						Hum_row = 0;
 					}
 
-					else if (last_AI)
+					if (last_AI)
 					{
 						AI_counter += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 					}
 
-					else
+					if (last_hum)
 					{
 						human_counter += 1;
+						p_Humscore += 1;
 						Hum_row = 0;
 					}
 
@@ -429,22 +428,17 @@ void AIShell::winning_spaces()
 					AI_row += 1;
 					last_hum = false;
 
-					if (human_counter < k)
-					{
-						human_counter = 0;
-						p_Humscore = 0;
-						Hum_row = 0;
-					}
+					human_counter = 0;
+					p_Humscore = 0;
+					Hum_row = 0;
 
-					if (AI_row != k)
-					{
-						p_AIscore += (5 * AI_row);
-					}
+
+					p_AIscore += (5 * AI_row);
+
 
 					if (AI_row == k)
 					{
-						AI_score = 500;
-						Human_score += p_Humscore;
+						AI_score = 1000;
 						return;
 					}
 
@@ -457,31 +451,26 @@ void AIShell::winning_spaces()
 					Hum_row += 1;
 					last_AI = false;
 
-					if (AI_counter < k)
-					{
-						AI_counter = 0;
-						p_AIscore = 0;
-						AI_row = 0;
-					}
+					AI_counter = 0;
+					p_AIscore = 0;
+					AI_row = 0;
 
-					if (Hum_row != k)
-					{
-						p_Humscore += (5 * Hum_row);
-					}
+
+					p_Humscore += (5 * Hum_row);
 
 					if (Hum_row == k)
 					{
 						Human_score = 1000;
-						AI_score += p_AIscore;
 						return;
 					}
-
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
+					*/
 
 					last_hum = true;
 
@@ -512,19 +501,23 @@ void AIShell::winning_spaces()
 					{
 						AI_counter += 1;
 						human_counter += 1;
+						p_Humscore += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 						Hum_row = 0;
 					}
 
-					else if (last_AI)
+					if (last_AI)
 					{
 						AI_counter += 1;
+						p_AIscore += 1;
 						AI_row = 0;
 					}
 
-					else
+					if (last_hum)
 					{
 						human_counter += 1;
+						p_Humscore += 1;
 						Hum_row = 0;
 					}
 
@@ -536,22 +529,17 @@ void AIShell::winning_spaces()
 					AI_row += 1;
 					last_hum = false;
 
-					if (human_counter < k)
-					{
-						human_counter = 0;
-						p_Humscore = 0;
-						Hum_row = 0;
-					}
+					human_counter = 0;
+					p_Humscore = 0;
+					Hum_row = 0;
+					
 
-					if (AI_row != k)
-					{
-						p_AIscore += (5 * AI_row);
-					}
+					p_AIscore += (5 * AI_row);
+			
 
 					if (AI_row == k)
 					{
-						AI_score = 500;
-						Human_score += p_Humscore;
+						AI_score = 1000;
 						return;
 					}
 
@@ -564,31 +552,26 @@ void AIShell::winning_spaces()
 					Hum_row += 1;
 					last_AI = false;
 
-					if (AI_counter < k)
-					{
-						AI_counter = 0;
-						p_AIscore = 0;
-						AI_row = 0;
-					}
 
-					if (Hum_row != k)
-					{
-						p_Humscore += (5 * Hum_row);
-					}
+					AI_counter = 0;
+					p_AIscore = 0;
+					AI_row = 0;
+
+					p_Humscore += (5 * Hum_row);
 
 					if (Hum_row == k)
 					{
 						Human_score = 1000;
-						AI_score += p_AIscore;
 						return;
 					}
-
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
+					*/
 
 					last_hum = true;
 
