@@ -28,8 +28,8 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-	alpha = -INFINITY;
-	beta = INFINITY;
+	int alpha = -INFINITY;
+	int beta = INFINITY;
 	int col = 0;
 	int row = 0;
 
@@ -40,13 +40,12 @@ Move AIShell::minimax(int d) {
 			if (gameState[i][j] == NO_PIECE) 
 			{
 				gameState[i][j] = AI_PIECE;
-				int possible = FindMin(d - 1);
-				if (possible >= alpha) 
+				int possible = FindMin(alpha, beta, d - 1);
+				if (possible > alpha) 
 				{
 					alpha = possible;
 					col = i;
 					row = j;
-					chosen = true;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
@@ -56,129 +55,108 @@ Move AIShell::minimax(int d) {
 	return Move(col, row);
 }
 
-int AIShell::FindMin(int d) {
-	int min = INFINITY;
+int AIShell::FindMin(int alpha, int beta, int d) {
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
+
 					gameState[i][j] = NO_PIECE;
+
 					if (beta < possible) {
-						min = possible;
 						beta = possible;
 					}
 					
 					if (alpha >= beta) {
-						beta = INFINITY;
-						return min;
+						return beta;
 					}
 				}
 			}
 		}
-		beta = INFINITY;
-		return min;
+
+		return beta;
 	}
 	
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = HUMAN_PIECE;
-				int possible = FindMax(d - 1);
+				int possible = FindMax(alpha, beta, d - 1);
 
 				if (beta < possible) {
-					min = possible;
 					beta = possible;
 				}
-				gameState[i][j] = NO_PIECE;
-				if (alpha >= beta) {
-					beta = INFINITY;
-					return min;
 
+				gameState[i][j] = NO_PIECE;
+
+				if (alpha >= beta) {
+					return beta;
 				}
 			}
 		}
 	}
-	beta = INFINITY;
-	return min;
+
+	return beta;
 }
 
-int AIShell::FindMax(int d) {
-	int max = -INFINITY;
+int AIShell::FindMax(int alpha, int beta, int d) {
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = AI_PIECE;
 					int possible = score();
+					
 					if (possible > alpha) {
-						max = possible;
-						if (!chosen)
-						{
-							alpha = possible;
-						}
+						alpha = possible;
 					}
 					gameState[i][j] = NO_PIECE;
-					if (alpha >= beta) {
-						if (!chosen)
-						{
-							alpha = -INFINITY;
-						}
-						
-						return max;
+					if (alpha >= beta) {						
+						return alpha;
 					}
 				}
 			}
 		}
-		if (!chosen)
-		{
-			alpha = -INFINITY;
-		}
-		return max;
+		return alpha;
 	}
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = AI_PIECE;
-				int possible = FindMin(d - 1);
+				int possible = FindMin(alpha, beta, d - 1);
 				
 				if (possible > alpha) {
-					max = possible;
-					if (!chosen)
-					{
-						alpha = possible;
-					}
+					alpha = possible;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
 
 			if (alpha >= beta) {
-
-				if (!chosen)
-				{
-					alpha = -INFINITY;
-				}
-
-				return max;
+				return alpha;
 
 			}
 		}
 	}
 
-	if (!chosen)
-	{
-		alpha = -INFINITY;
-	}
-	return max;
+	return alpha;
 }
 
 int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	check_columns();
+	if (Human_score == INFINITY)
+	{
+		return -INFINITY;
+	}
 	check_rows();
+	if (Human_score == INFINITY)
+	{
+		return -INFINITY;
+	}
 	//check_rdiagonals();
 	//check_ldiagonals();
 
@@ -256,13 +234,11 @@ void AIShell::check_columns() {
 				}
 
 				if (Hum_row == k) {
-					p_Humscore = INFINITY;
 					Human_score = INFINITY;
 					return;
 				}
 
 				if (Hum_row == k-1) {
-					p_Humscore = INFINITY;
 					Human_score = INFINITY;
 					return;
 				}
@@ -371,13 +347,11 @@ void AIShell::check_rows() {
 				}
 
 				if (Hum_row == k) {
-					p_Humscore = INFINITY;
 					Human_score = INFINITY;
 					return;
 				}
 
 				if (Hum_row == k-1) {
-					p_Humscore = INFINITY;
 					Human_score = INFINITY;
 					return;
 				}

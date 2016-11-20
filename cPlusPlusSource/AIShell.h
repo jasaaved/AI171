@@ -27,9 +27,7 @@ private:
 	Move lastMove; //this is the move made last by your opponent. If your opponent has not made a move yet (you move first) then this move will hold the value (-1, -1) instead.
 	int AI_score;
 	int Human_score;
-	int alpha;
-	int beta;
-	bool chosen;
+
 
 public:
 	int deadline; //this is how many milliseconds the AI has to make move.
@@ -40,8 +38,8 @@ public:
 	~AIShell();
 	Move makeMove();
 	Move minimax(int d);
-	int FindMax(int d);
-	int FindMin(int d);
+	int FindMax(int alpha, int beta, int d);
+	int FindMin(int alpha, int beta, int d);
 	int score();
 	void check_rows();
 	void check_columns();
