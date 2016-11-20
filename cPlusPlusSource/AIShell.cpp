@@ -136,10 +136,6 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 				gameState[i][j] = NO_PIECE;
 			}
 
-			if (alpha >= beta) {
-				return alpha;
-
-			}
 		}
 	}
 
