@@ -147,7 +147,7 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	winning_spaces();
-	//std::cout << "score:  " << AI_score - Human_score << std::endl
+	std::cout << "score:  " << AI_score - Human_score << std::endl;
 
 	return (AI_score - Human_score);
 
