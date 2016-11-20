@@ -56,7 +56,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
-	std::cout << "MIN ALPHA: " << alpha << " BETA: " << beta << std::endl;
+	std::cout << "MIN ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -103,7 +103,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 }
 
 int AIShell::FindMax(int alpha, int beta, int d) {
-	std::cout << "MAX ALPHA: " << alpha << " BETA: " << beta << std::endl;
+	std::cout << "MAX ALPHA: " << alpha << " BETA: " << beta << " d:" << d << std::endl;
 	if (d == 1) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
