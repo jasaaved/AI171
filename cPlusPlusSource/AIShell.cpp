@@ -35,26 +35,31 @@ Move AIShell::minimax(int d) {
 	int col = 0;
 	int row = 0;
 
-	for (int i = 0; i < numCols; i++) 
-	{
-		for (int j = 0; j < numRows; j++) 
+	while (time_left() - start_time <= move_deadline) {
+		for (int i = 0; i < numCols; i++)
 		{
-
-			if (gameState[i][j] == NO_PIECE) 
+			for (int j = 0; j < numRows; j++)
 			{
-				
-				gameState[i][j] = AI_PIECE;
-				int possible = FindMin(alpha, beta, d - 1);
-				if (possible > alpha) 
-				{
-					alpha = possible;
-					col = i;
-					row = j;
-				}
-				gameState[i][j] = NO_PIECE;
 
+				if (gameState[i][j] == NO_PIECE)
+				{
+
+					gameState[i][j] = AI_PIECE;
+					int possible = FindMin(alpha, beta, d - 1);
+					if (possible > alpha)
+					{
+						alpha = possible;
+						col = i;
+						row = j;
+					}
+					gameState[i][j] = NO_PIECE;
+
+				}
 			}
 		}
+
+		depth++;
+		best_path.push_back(Move(col, row));
 	}
 
 	return Move(col, row);
@@ -62,7 +67,8 @@ Move AIShell::minimax(int d) {
 
 int AIShell::FindMin(int alpha, int beta, int d) {
 
-	if (d == 1 || time_left() - start_time >= move_deadline) {
+	if (d == 1 || time_left() - start_time >= move_deadline)
+	{
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
@@ -163,7 +169,7 @@ int AIShell::score() {
 	{
 		return 1000;
 	}
-	//std::cout << "score:  " << AI_score - Human_score << std::endl;
+
 
 	return (AI_score - Human_score);
 
