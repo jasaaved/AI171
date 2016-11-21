@@ -30,14 +30,15 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
+
 	int alpha = -INF;
 	int beta = INF;
 	int col = 0;
 	int row = 0;
 
-	for (int i = 0; i < numCols; i++) 
+	for (int i = lastMove.col; i < numCols; i++) 
 	{
-		for (int j = 0; j < numRows; j++) 
+		for (int j = lastMove.row; j < numRows; j++) 
 		{
 
 			if (gameState[i][j] == NO_PIECE) 
