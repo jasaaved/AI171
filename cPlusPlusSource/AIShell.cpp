@@ -30,15 +30,14 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-	std::cout << "Last col: " << lastMove.col << " Last Rows: " << lastMove.row << std::endl;
 	int alpha = -INF;
 	int beta = INF;
 	int col = 0;
 	int row = 0;
 
-	for (int i = lastMove.col; i < numCols; i++) 
+	for (int i = 0; i < numCols; i++) 
 	{
-		for (int j = lastMove.row; j < numRows; j++) 
+		for (int j = 0; j < numRows; j++) 
 		{
 
 			if (gameState[i][j] == NO_PIECE) 
@@ -54,9 +53,6 @@ Move AIShell::minimax(int d) {
 				}
 				gameState[i][j] = NO_PIECE;
 
-				if (time_left() - start_time >= move_deadline) {
-					return Move(col, row);
-				}
 			}
 		}
 	}
