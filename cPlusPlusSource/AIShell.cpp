@@ -58,7 +58,7 @@ Move AIShell::minimax(int d) {
 			}
 		}
 
-		depth++;
+		d++;
 		best_path.push_back(Move(col, row));
 	}
 
