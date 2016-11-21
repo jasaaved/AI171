@@ -40,7 +40,6 @@ Move AIShell::minimax(int d) {
 		for (int j = 0; j < numRows; j++) 
 		{
 			if (time_left() - start_time >= move_deadline) {
-				std::cout << "hello" << std::endl;
 				return Move(col, row);
 			}
 			if (gameState[i][j] == NO_PIECE) 
@@ -62,7 +61,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
-	std::cout << "Time left: " << time_left() - start_time << std::endl;
+
 	if (d == 1 || time_left() - start_time >= move_deadline) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -109,7 +108,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 }
 
 int AIShell::FindMax(int alpha, int beta, int d) {
-	std::cout << "Time left: " << time_left() - start_time << std::endl;
+
 	if (d == 1 || time_left() - start_time >= move_deadline) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -472,7 +471,6 @@ Move AIShell::makeMove()
 	}
 
 	move_deadline = deadline / 1000;
-	std::cout << move_deadline << std::endl;
 	move_deadline = move_deadline - 0.5;
 	
 	return minimax(depth);	 
