@@ -8,12 +8,12 @@
 
 AIShell::AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move lastMove)
 {
-	this->deadline=0;
 	this->numRows=numRows;
 	this->numCols=numCols;
 	this->gravityOn=gravityOn;
 	this->gameState=gameState;
 	this->lastMove=lastMove;
+	this->start_time = time_left();
 }
 
 
@@ -38,6 +38,9 @@ Move AIShell::minimax(int d) {
 	{
 		for (int j = 0; j < numRows; j++) 
 		{
+			if (time_left() - start_time >= deadline - 250) {
+				return Move(col, row);
+			}
 			if (gameState[i][j] == NO_PIECE) 
 			{
 				gameState[i][j] = AI_PIECE;
@@ -57,7 +60,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
-	if (d == 1) {
+	if (d == 1 || time_left() - start_time >= deadline - 500) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
@@ -103,7 +106,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 }
 
 int AIShell::FindMax(int alpha, int beta, int d) {
-	if (d == 1) {
+	if (d == 1 || time_left() - start_time >= deadline - 500) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
