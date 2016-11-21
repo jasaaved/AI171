@@ -40,6 +40,7 @@ Move AIShell::minimax(int d) {
 		for (int j = 0; j < numRows; j++) 
 		{
 			if (time_left() - start_time >= move_deadline) {
+				std::cout << "hello" << std::endl;
 				return Move(col, row);
 			}
 			if (gameState[i][j] == NO_PIECE) 
