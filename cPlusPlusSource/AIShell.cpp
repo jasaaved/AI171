@@ -14,6 +14,7 @@ AIShell::AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move
 	this->gameState=gameState;
 	this->lastMove=lastMove;
 	this->start_time = time_left();
+	std::cout << "Deadline: " << deadline << std::endl;
 }
 
 
@@ -73,7 +74,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 						beta = possible;
 					}
 					
-					if (alpha >= beta) {
+					if (alpha >= beta || time_left() - start_time >= deadline - 500) {
 						return beta;
 					}
 				}
@@ -95,7 +96,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 
 				gameState[i][j] = NO_PIECE;
 
-				if (alpha >= beta) {
+				if (alpha >= beta || time_left() - start_time >= deadline - 500) {
 					return beta;
 				}
 			}
@@ -117,7 +118,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 						alpha = possible;
 					}
 					gameState[i][j] = NO_PIECE;
-					if (alpha >= beta) {						
+					if (alpha >= beta || time_left() - start_time >= deadline - 500) {
 						return alpha;
 					}
 				}
@@ -137,7 +138,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 				gameState[i][j] = NO_PIECE;
 			}
 
-			if (alpha >= beta) {
+			if (alpha >= beta || time_left() - start_time >= deadline - 500) {
 				return alpha;
 
 			}
