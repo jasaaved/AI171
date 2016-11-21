@@ -2,7 +2,7 @@
 #define AISHELL_H
 
 #pragma once
-#include <time.h>
+#include <sys/time.h>
 #include <vector>
 
 #include "Move.h"
