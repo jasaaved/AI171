@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 
+
 AIShell::AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move lastMove)
 {
 	this->deadline=0;
@@ -448,8 +449,12 @@ void AIShell::winning_spaces()
 }
 
 
-
-
+int AIShell::time_left() {
+	timeval curTime;
+	gettimeofday(&curTime, NULL);
+	int milli = curTime.tv_usec / 1000;
+	return milli;
+}
 
 
 

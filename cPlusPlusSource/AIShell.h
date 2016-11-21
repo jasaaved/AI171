@@ -2,6 +2,9 @@
 #define AISHELL_H
 
 #pragma once
+#include <time.h>
+#include <vector>
+
 #include "Move.h"
 
 
@@ -27,6 +30,8 @@ private:
 	Move lastMove; //this is the move made last by your opponent. If your opponent has not made a move yet (you move first) then this move will hold the value (-1, -1) instead.
 	int AI_score;
 	int Human_score;
+	std::vector<Move> best_path;
+
 
 
 public:
@@ -38,10 +43,11 @@ public:
 	~AIShell();
 	Move makeMove();
 	Move minimax(int d);
-	int FindMax(int alpha, int beta, int d);
-	int FindMin(int alpha, int beta, int d);
+	int FindMax(int alpha, int beta, int depth);
+	int FindMin(int alpha, int beta, int depth);
 	int score();
 	void winning_spaces();
+	int time_left();
 };
 
 #endif //AISHELL_H
