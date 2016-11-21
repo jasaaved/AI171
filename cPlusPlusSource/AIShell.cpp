@@ -39,11 +39,10 @@ Move AIShell::minimax(int d) {
 	{
 		for (int j = 0; j < numRows; j++) 
 		{
-			if (time_left() - start_time >= move_deadline) {
-				return Move(col, row);
-			}
+
 			if (gameState[i][j] == NO_PIECE) 
 			{
+				
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(alpha, beta, d - 1);
 				if (possible > alpha) 
@@ -53,6 +52,10 @@ Move AIShell::minimax(int d) {
 					row = j;
 				}
 				gameState[i][j] = NO_PIECE;
+
+				if (time_left() - start_time >= move_deadline) {
+					return Move(col, row);
+				}
 			}
 		}
 	}
