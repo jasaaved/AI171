@@ -473,7 +473,7 @@ Move AIShell::makeMove()
 {
 	if (deadline == 0)
 	{
-		deadline = 5000;
+		deadline = 10000;
 	}
 
 	move_deadline = deadline / 1000;
