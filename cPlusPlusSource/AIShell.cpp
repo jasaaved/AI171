@@ -30,7 +30,7 @@ AIShell::~AIShell()
 }
 
 Move AIShell::minimax(int d) {
-
+	std::cout << "Last col: " << lastMove.col << " Last Rows: " << lastMove.row << std::endl;
 	int alpha = -INF;
 	int beta = INF;
 	int col = 0;
