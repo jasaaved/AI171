@@ -478,9 +478,11 @@ Move AIShell::makeMove()
 		deadline = 10000;
 	}
 
+	std::cout << deadline << std::endl;
+
 	move_deadline = deadline / 1000;
 	move_deadline = move_deadline - 0.5;
-	std::cout << move_deadline << std::endl;
+	//std::cout << move_deadline << std::endl;
 	
 	return minimax(depth);	 
 }
