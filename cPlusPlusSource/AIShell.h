@@ -32,6 +32,7 @@ private:
 	int Human_score;
 	double start_time;
 	std::vector<Move> best_path;
+	std::vector<Move> temp_best;
 	double move_deadline;
 
 
