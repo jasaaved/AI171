@@ -39,7 +39,7 @@ Move AIShell::minimax(int d) {
 	{
 		for (int j = 0; j < numRows; j++) 
 		{
-			if (time_left() - start_time >= deadline - 250) {
+			if (time_left() - start_time >= move_deadline) {
 				return Move(col, row);
 			}
 			if (gameState[i][j] == NO_PIECE) 
@@ -62,7 +62,7 @@ Move AIShell::minimax(int d) {
 
 int AIShell::FindMin(int alpha, int beta, int d) {
 	std::cout << "Time left: " << time_left() - start_time << std::endl;
-	if (d == 1 || time_left() - start_time >= deadline - 500) {
+	if (d == 1 || time_left() - start_time >= move_deadline) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
@@ -75,7 +75,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 						beta = possible;
 					}
 					
-					if (alpha >= beta || time_left() - start_time >= deadline - 500) {
+					if (alpha >= beta) {
 						return beta;
 					}
 				}
@@ -97,7 +97,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 
 				gameState[i][j] = NO_PIECE;
 
-				if (alpha >= beta || time_left() - start_time >= deadline - 500) {
+				if (alpha >= beta || time_left() - start_time >= move_deadline) {
 					return beta;
 				}
 			}
@@ -109,7 +109,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 
 int AIShell::FindMax(int alpha, int beta, int d) {
 	std::cout << "Time left: " << time_left() - start_time << std::endl;
-	if (d == 1 || time_left() - start_time >= deadline - 500) {
+	if (d == 1 || time_left() - start_time >= move_deadline) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 				if (gameState[i][j] == NO_PIECE) {
@@ -120,7 +120,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 						alpha = possible;
 					}
 					gameState[i][j] = NO_PIECE;
-					if (alpha >= beta || time_left() - start_time >= deadline - 500) {
+					if (alpha >= beta) {
 						return alpha;
 					}
 				}
@@ -140,7 +140,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 				gameState[i][j] = NO_PIECE;
 			}
 
-			if (alpha >= beta || time_left() - start_time >= deadline - 500) {
+			if (alpha >= beta || time_left() - start_time >= move_deadline) {
 				return alpha;
 
 			}
@@ -469,5 +469,8 @@ Move AIShell::makeMove()
 	{
 		deadline = 5000;
 	}
+
+	move_deadline - deadline / 1000;
+	move_deadline = move_deadline - 0.5;
 	return minimax(depth);	 
 }
