@@ -39,7 +39,7 @@ private:
 public:
 	int deadline; //this is how many milliseconds the AI has to make move.
 	int k;        // k is the number of pieces a player must get in a row/column/diagonal to win the game. IE in connect 4, this variable would be 4
-	int depth = 2;
+	int depth;
 
 	AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move lastMove);
 	~AIShell();
