@@ -456,10 +456,9 @@ void AIShell::winning_spaces()
 
 
 int AIShell::time_left() {
-	timeval curTime;
-	gettimeofday(&curTime, NULL);
-	int milli = curTime.tv_usec / 1000;
-	return milli;
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return((double)(tv.tv_sec + (double)tv.tv_usec / 1000000.0));
 }
 
 
