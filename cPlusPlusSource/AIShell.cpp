@@ -14,7 +14,7 @@ AIShell::AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move
 	this->gameState=gameState;
 	this->lastMove=lastMove;
 	this->start_time = time_left();
-	std::cout << "Deadline: " << deadline << std::endl;
+	
 }
 
 
@@ -464,5 +464,9 @@ int AIShell::time_left() {
 
 Move AIShell::makeMove()
 {
+	if (deadline == 0)
+	{
+		deadline = 5000;
+	}
 	return minimax(depth);	 
 }
