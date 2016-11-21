@@ -61,7 +61,7 @@ Move AIShell::minimax(int d) {
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
-	std::cout << "Time left: " << time_left()  << "time started: "<< start_time << std::endl;
+	std::cout << "Time left: " << time_left() - start_time << std::endl;
 	if (d == 1 || time_left() - start_time >= deadline - 500) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
@@ -108,7 +108,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 }
 
 int AIShell::FindMax(int alpha, int beta, int d) {
-	std::cout << "Time left: " << time_left() << "time started: " << start_time << std::endl;
+	std::cout << "Time left: " << time_left() - start_time << std::endl;
 	if (d == 1 || time_left() - start_time >= deadline - 500) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
