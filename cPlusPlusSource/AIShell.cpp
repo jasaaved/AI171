@@ -59,6 +59,8 @@ Move AIShell::minimax(int d) {
 		}
 
 		d++;
+		alpha = -INF;
+		beta = INF;
 		best_path.push_back(Move(col, row));
 	}
 
