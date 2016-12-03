@@ -36,7 +36,7 @@ Move AIShell::minimax(int d) {
 	int row = 0;
 
 	while (time_left() - start_time <= move_deadline) {
-
+		/*
 		if (!temp_best.empty()) {
 			Move s = temp_best.back();
 				temp_best.pop_back();
@@ -50,7 +50,7 @@ Move AIShell::minimax(int d) {
 					row = s.row;
 				}
 				gameState[s.col][s.row] = NO_PIECE;
-
+*/
 		}
 		for (int i = 0; i < numCols; i++)
 		{
@@ -78,9 +78,9 @@ Move AIShell::minimax(int d) {
 		std::cout << "depth: " << d << std::endl;
 		alpha = -INF;
 		beta = INF;
-		best_path.push_back(Move(col, row));
-		temp_best.clear();
-		temp_best = best_path;
+		//best_path.push_back(Move(col, row));
+		//temp_best.clear();
+		//temp_best = best_path;
 	}
 
 	return best_path.back();
