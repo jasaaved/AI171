@@ -50,8 +50,9 @@ Move AIShell::minimax(int d) {
 					row = s.row;
 				}
 				gameState[s.col][s.row] = NO_PIECE;
-*/
+
 		}
+		*/
 		for (int i = 0; i < numCols; i++)
 		{
 			for (int j = 0; j < numRows; j++)
