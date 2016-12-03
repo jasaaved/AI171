@@ -79,7 +79,7 @@ Move AIShell::minimax(int d) {
 		std::cout << "depth: " << d << std::endl;
 		alpha = -INF;
 		beta = INF;
-		//best_path.push_back(Move(col, row));
+		best_path.push_back(Move(col, row));
 		//temp_best.clear();
 		//temp_best = best_path;
 	}
