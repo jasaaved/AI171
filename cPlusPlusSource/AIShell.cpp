@@ -218,8 +218,10 @@ void AIShell::winning_spaces()
 	int AI_empty;
 	int hum_same;
 	int hum_empty;
+	int zero_empty;
 	bool AI_useless;
 	bool Hum_useless;
+	bool start_zero;
 
 
 	for (int i = 0; i < numCols; ++i) {
@@ -516,9 +518,11 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
+			zero_empty = 0;
 			AI_useless = false;
 			Hum_useless = false;
 
+			//check vertical
 			while (j + count < numRows && count < k)
 			{
 				if (gameState[i][j] == 1)
@@ -572,6 +576,43 @@ void AIShell::winning_spaces()
 						if (gameState[i][j + count] == 0)
 						{
 							hum_empty += 1;
+						}
+					}
+
+				}
+
+				if (gameState[i][j] == 0)
+				{
+					if (gameState[i][j + count] == 0)
+					{
+						zero_empty += 1;
+					}
+
+					if (gameState[i][j + count] == 1)
+					{
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
+
+						if (!AI_useless)
+						{
+							AI_same += 1;
+							AI_empty = zero_empty;
+						}
+					}
+
+					if (gameState[i][j + count] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+
+						if (!Hum_useless)
+						{
+							hum_same += 1;
+							hum_empty = zero_empty;
 						}
 					}
 
