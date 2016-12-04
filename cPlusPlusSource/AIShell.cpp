@@ -32,6 +32,7 @@ AIShell::~AIShell()
 
 Move AIShell::minimax(int d) {
 	int alpha = -INF;
+	int best_alpha = -INF;
 	int beta = INF;
 	int col = 0;
 	int row = 0;
@@ -43,16 +44,15 @@ Move AIShell::minimax(int d) {
 			for (int j = 0; j < numRows; j++)
 			{
 
-
 				if (gameState[i][j] == NO_PIECE)
 				{
 
 					gameState[i][j] = AI_PIECE;
 					int possible = FindMin(alpha, beta, d - 1);
-					if (possible > alpha)
+					if (possible > alpha && possible > best_alpha)
 					{
-						best_path.clear();
 						alpha = possible;
+						best_alpha = alpha;
 						col = i;
 						row = j;
 					}
@@ -66,8 +66,6 @@ Move AIShell::minimax(int d) {
 		index = 0;
 		alpha = -INF;
 		beta = INF;
-		best_path.push_back(Move(col, row));
-		temp_best = best_path;
 	}
 
 	return Move(col, row);
@@ -124,25 +122,10 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 int AIShell::FindMax(int alpha, int beta, int d) {
 
 	if (d == 1 || time_left() - start_time >= move_deadline) {
-		if (!temp_best.empty() && index < temp_best.size()) {
-			Move s = temp_best[index];
-			gameState[s.col][s.row] = AI_PIECE;
-
-			int possible = score();
-
-			if (possible > alpha) {
-				alpha = possible;
-			}
-			gameState[s.col][s.row] = NO_PIECE;
-
-		}
+		
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 
-				if (!temp_best.empty() && index < temp_best.size() && temp_best[index].col == i && temp_best[index].row == j)
-				{
-					continue;
-				}
 				if (gameState[i][j] == NO_PIECE) {
 					gameState[i][j] = AI_PIECE;
 					int possible = score();
@@ -160,19 +143,6 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 		return alpha;
 	}
 
-	if (!temp_best.empty() && index < temp_best.size()) {
-		Move s = temp_best[index];
-		temp_best.pop_back();
-		gameState[s.col][s.row] = AI_PIECE;
-		index++;
-		int possible = FindMin(alpha, beta, d - 1);
-
-		if (possible > alpha) {
-			alpha = possible;
-		}
-		gameState[s.col][s.row] = NO_PIECE;
-
-	}
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
