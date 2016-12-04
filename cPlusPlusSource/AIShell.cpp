@@ -51,7 +51,7 @@ Move AIShell::minimax(int d) {
 					gameState[i][j] = AI_PIECE;
 					int possible = FindMin(alpha, beta, d - 1);
 
-					if (d == 2 && possible == 1000)
+					if (d == 2 && possible >= 1000)
 					{
 						return Move(i, j);
 					}
@@ -93,7 +93,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 					
 					gameState[i][j] = NO_PIECE;
 
-					if (possible == 1000) {
+					if (possible >= 1000) {
 						return possible;
 					}
 
@@ -121,7 +121,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(alpha, beta, d - 1);
 
-				if (possible == 1000) {
+				if (possible >= 1000) {
 					return possible;
 				}
 
@@ -355,7 +355,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (Hum_row == k)
+					if (hum_same == k)
 					{
 						Human_score == 1000;
 						return;
