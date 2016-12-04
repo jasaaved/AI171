@@ -301,11 +301,14 @@ void AIShell::winning_spaces()
 						return;
 					}
 					
+					/*
 					if (Hum_row == k - 1)
 					{
-						Human_score = 1000;
-						return;
+					Human_score = 1000;
+					AI_score += p_AIscore;
+					return;
 					}
+					*/
 					
 
 				}
@@ -405,12 +408,14 @@ void AIShell::winning_spaces()
 						return;
 					}
 					
+					/*
 					if (Hum_row == k - 1)
 					{
-						Human_score = 1000;
-						AI_score += p_AIscore;
-						return;
+					Human_score = 1000;
+					AI_score += p_AIscore;
+					return;
 					}
+					*/
 					
 
 				}
@@ -514,12 +519,14 @@ void AIShell::winning_spaces()
 						return;
 					}
 					
+					/*
 					if (Hum_row == k - 1)
 					{
-						Human_score = 1000;
-						AI_score += p_AIscore;
-						return;
+					Human_score = 1000;
+					AI_score += p_AIscore;
+					return;
 					}
+					*/
 					
 
 				}
@@ -620,14 +627,14 @@ void AIShell::winning_spaces()
 						Human_score = 1000;
 						return;
 					}
-					
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
-					
+					*/
 				}
 
 				++count;
