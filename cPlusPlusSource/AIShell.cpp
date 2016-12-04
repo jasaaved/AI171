@@ -218,6 +218,8 @@ void AIShell::winning_spaces()
 	int AI_empty;
 	int hum_same;
 	int hum_empty;
+	bool AI_useless;
+	bool Hum_useless;
 
 
 	for (int i = 0; i < numCols; ++i) {
@@ -236,37 +238,62 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
+			AI_useless = false;
+
 			//horizontal check
 			while (i + count < numCols && count < k)
 			{
-				if (gameState[i][j] == 1 && (gameState[i + count][j] == 1 || gameState[i + count][j] == 0))
+				if (gameState[i][j] == 1)
 				{
-					AI_row += 1;
-
-					if (gameState[i + count][j] == 1)
+					if (gameState[i + count][j] == -1)
 					{
-						AI_same += 1;
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (!AI_useless)
 					{
-						AI_empty += 1;
+						AI_row += 1;
+
+						if (gameState[i + count][j] == 1)
+						{
+							AI_same += 1;
+						}
+
+						if (gameState[i + count][j] == 0)
+						{
+							AI_empty += 1;
+						}
 					}
 
 				}
 
-				else if (gameState[i][j] == -1 && (gameState[i + count][j] == -1 || gameState[i + count][j] == 0))
+				else if (gameState[i][j] == -1)
 				{
-					Hum_row += 1;
-
-					if (gameState[i + count][j] == -1)
+					if (gameState[i + count][j] == 1)
 					{
-						hum_same += 1;
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (!Hum_useless)
 					{
-						hum_empty += 1;
+
+						Hum_row += 1;
+
+						if (gameState[i + count][j] == -1)
+						{
+							hum_same += 1;
+						}
+
+						if (gameState[i + count][j] == 0)
+						{
+							hum_empty += 1;
+						}
 					}
 
 				}
@@ -275,34 +302,22 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (Hum_row == k)
+					if (hum_same == k)
 					{
-						if (hum_same == k)
-						{
-							Human_score == 1000;
-							return;
-						}
+						Human_score == 1000;
+						return;
+
 					}
 
-					if (AI_row == k)
+					if (AI_same == k)
 					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
-						
+						AI_score == 1000;
+						return;	
 					}
 
-					if (Hum_row == 0) 
-					{
-						AI_score += (AI_same * 5) + (AI_empty);
-					}
+					AI_score += (AI_same * 5) + (AI_empty);
 
-					if (AI_row == 0)
-					{
-						Human_score += (hum_same * 5) + (hum_empty);
-					}
+					Human_score += (hum_same * 5) + (hum_empty);
 
 				}
 			}
@@ -316,39 +331,62 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
+			AI_useless = false;
+			Hum_useless = false;
+
 			//Upper-right diagnol check
 			while (i + count < numCols && j + count < numRows && count < k) 
 			{
-				if (gameState[i][j] == 1 && (gameState[i + count][j + count] == 1 || gameState[i + count][j + count] == 0))
+				if (gameState[i][j] == 1)
 				{
-					
-					AI_row += 1;
-
-					if (gameState[i + count][j + count] == 1)
-					{
-						AI_same += 1;
-					}
-
-					if (gameState[i + count][j + count] == 0)
-					{
-						AI_empty += 1;
-					}
-
-
-				}
-
-				if (gameState[i][j] == -1 && (gameState[i + count][j + count] == -1 || gameState[i + count][j + count] == 0))
-				{
-					Hum_row += 1;
-
 					if (gameState[i + count][j + count] == -1)
 					{
-						hum_same += 1;
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+					}
+					
+					if (!AI_useless)
+					{
+						AI_row += 1;
+
+						if (gameState[i + count][j + count] == 1)
+						{
+							AI_same += 1;
+						}
+
+						if (gameState[i + count][j + count] == 0)
+						{
+							AI_empty += 1;
+						}
+					}
+				}
+
+				if (gameState[i][j] == -1)
+				{
+					if (gameState[i + count][j + count] == 1)
+					{
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
 					}
 
-					if (gameState[i + count][j + count] == 0)
+					if (!Hum_useless)
 					{
-						hum_empty += 1;
+
+						Hum_row += 1;
+
+						if (gameState[i + count][j + count] == -1)
+						{
+							hum_same += 1;
+						}
+
+						if (gameState[i + count][j + count] == 0)
+						{
+							hum_empty += 1;
+						}
 					}
 
 				}
@@ -357,34 +395,22 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (Hum_row == k)
+					if (hum_same == k)
 					{
-						if (hum_same == k)
-						{
-							Human_score == 1000;
-							return;
-						}
-					}
-
-					if (AI_row == k)
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
+						Human_score == 1000;
+						return;
 
 					}
 
-					if (Hum_row == 0)
+					if (AI_same == k)
 					{
-						AI_score += (AI_same * 5) + (AI_empty);
+						AI_score == 1000;
+						return;
 					}
 
-					if (AI_row == 0)
-					{
-						Human_score += (hum_same * 5) + (hum_empty);
-					}
+					AI_score += (AI_same * 5) + (AI_empty);
+
+					Human_score += (hum_same * 5) + (hum_empty);
 
 				}
 			}
@@ -397,39 +423,64 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
+			AI_useless = false;
+			Hum_useless = false;
 			//check lower right diagonals
 			while (i + count < numCols && j - count >= 0 && count < k)
 			{
-				if (gameState[i][j] == 1 && (gameState[i + count][j - count] == 1 || gameState[i + count][j - count] == 0))
+				if (gameState[i][j] == 1)
 				{
 					
-					AI_row += 1;
-
-					if (gameState[i + count][j - count] == 1)
+					if (gameState[i + count][j - count] == -1)
 					{
-						AI_same += 1;
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
 					}
 
-					if (gameState[i + count][j - count] == 0)
+					if (!AI_useless)
 					{
-						AI_empty += 1;
+						AI_row += 1;
+
+						if (gameState[i + count][j - count] == 1)
+						{
+							AI_same += 1;
+						}
+
+						if (gameState[i + count][j - count] == 0)
+						{
+							AI_empty += 1;
+						}
 					}
 
 
 				}
 
-				if (gameState[i][j] == -1 && (gameState[i + count][j - count] == -1 || gameState[i + count][j - count] == 0))
+				if (gameState[i][j] == -1)
 				{
-					Hum_row += 1;
-
-					if (gameState[i + count][j - count] == -1)
+					if (gameState[i + count][j - count] == 1)
 					{
-						hum_same += 1;
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
 					}
 
-					if (gameState[i + count][j - count] == 0)
+					if (!Hum_useless)
 					{
-						hum_empty += 1;
+
+						Hum_row += 1;
+
+						if (gameState[i + count][j - count] == -1)
+						{
+							hum_same += 1;
+						}
+
+						if (gameState[i + count][j - count] == 0)
+						{
+							hum_empty += 1;
+						}
 					}
 
 
@@ -438,35 +489,22 @@ void AIShell::winning_spaces()
 				++count;
 				if (count >= k)
 				{
-					if (Hum_row == k)
+					if (hum_same == k)
 					{
-						if (hum_same == k)
-						{
-							Human_score == 1000;
-							return;
-						}
-					}
-
-					if (AI_row == k)
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
+						Human_score == 1000;
+						return;
 
 					}
 
-					if (Hum_row == 0)
+					if (AI_same == k)
 					{
-						AI_score += (AI_same * 5) + (AI_empty);
+						AI_score == 1000;
+						return;
 					}
 
-					if (AI_row == 0)
-					{
-						Human_score += (hum_same * 5) + (hum_empty);
-					}
+					AI_score += (AI_same * 5) + (AI_empty);
 
+					Human_score += (hum_same * 5) + (hum_empty);
 				}
 
 			}
@@ -478,41 +516,64 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
+			AI_useless = false;
+			Hum_useless = false;
 
 			while (j + count < numRows && count < k)
 			{
-				if (gameState[i][j] == 1 && (gameState[i][j + count] == 1 || gameState[i][j + count] == 0))
+				if (gameState[i][j] == 1)
 				{
-					AI_row += 1;
-
-					if (gameState[i][j + count] == 1)
+					if (gameState[i][j + count] == -1)
 					{
-						AI_same += 1;
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
 					}
 
-					if (gameState[i][j + count] == 0)
+					if (!AI_useless)
 					{
-						AI_empty += 1;
+						AI_row += 1;
+
+						if (gameState[i][j + count] == 1)
+						{
+							AI_same += 1;
+						}
+
+						if (gameState[i][j + count] == 0)
+						{
+							AI_empty += 1;
+						}
 					}
 
 
 				}
 
-				if (gameState[i][j] == -1 && (gameState[i][j + count] == -1 || gameState[i][j + count] == 0))
+				if (gameState[i][j] == -1)
 				{
-					Hum_row += 1;
-
-					if (gameState[i][j + count] == -1)
+					if (gameState[i][j + count] == 1)
 					{
-						hum_same += 1;
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
 					}
 
-					if (gameState[i][j + count] == 0)
+					if (!Hum_useless)
 					{
-						hum_empty += 1;
+
+						Hum_row += 1;
+
+						if (gameState[i][j + count] == -1)
+						{
+							hum_same += 1;
+						}
+
+						if (gameState[i][j + count] == 0)
+						{
+							hum_empty += 1;
+						}
 					}
-
-
 
 				}
 
@@ -520,35 +581,22 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (Hum_row == k)
+					if (hum_same == k)
 					{
-						if (hum_same == k)
-						{
-							Human_score == 1000;
-							return;
-						}
-					}
-
-					if (AI_row == k)
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
+						Human_score == 1000;
+						return;
 
 					}
 
-					if (Hum_row == 0)
+					if (AI_same == k)
 					{
-						AI_score += (AI_same * 5) + (AI_empty);
+						AI_score == 1000;
+						return;
 					}
 
-					if (AI_row == 0)
-					{
-						Human_score += (hum_same * 5) + (hum_empty);
-					}
+					AI_score += (AI_same * 5) + (AI_empty);
 
+					Human_score += (hum_same * 5) + (hum_empty);
 				}
 			}
 
