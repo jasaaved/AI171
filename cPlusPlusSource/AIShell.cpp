@@ -49,9 +49,7 @@ Move AIShell::minimax(int d) {
 				int possible = BestMove();
 				if (possible == 1000)
 				{
-					col = i;
-					row = j;
-					return Move(col, row);
+					return Move(i, j);
 				}
 				gameState[i][j] == NO_PIECE;
 			}
