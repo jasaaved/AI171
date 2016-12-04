@@ -38,6 +38,25 @@ Move AIShell::minimax(int d) {
 	int col = 0;
 	int row = 0;
 
+	for (int i = 0; i < numCols; i++)
+	{
+		for (int j = 0; j < numRows; j++)
+		{
+			if (gameState[i][j] == NO_PIECE)
+			{
+
+				gameState[i][j] = AI_PIECE;
+				int possible = BestMove();
+				if (possible == 1000)
+				{
+					gameState[i][j] == NO_PIECE;
+					return Move(i, j);
+				}
+				gameState[i][j] == NO_PIECE;
+			}
+		}
+	}
+
 
 
 	while (time_left() - start_time <= move_deadline) {
@@ -648,6 +667,11 @@ void AIShell::winning_spaces()
 	}
 					
 
+}
+
+int AIShell::BestMove()
+{
+	return score();
 }
 
 
