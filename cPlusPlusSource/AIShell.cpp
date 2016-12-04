@@ -770,10 +770,6 @@ void AIShell::winning_spaces()
 
 }
 
-int AIShell::BestMove()
-{
-	return score();
-}
 
 
 inline double AIShell::time_left() {
