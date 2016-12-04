@@ -677,7 +677,7 @@ inline double AIShell::time_left() {
 
 int AIShell::BestMove()
 {
-	return score;
+	return score();
 }
 
 
