@@ -224,14 +224,28 @@ void AIShell::winning_spaces()
 
 			while (i + count < numCols)
 			{
-				if (gameState[i + count][j] == 0)
+				if (gameState[i + count][j] >= 0)
 				{
 					if (last_AI) {
 						p_AI_row += 1;
+						if (p_AI_row == k)
+						{
+							AI_score += p_AIscore;
+							p_AI_row = 0;
+							p_AIscore = 0;
+							last_AI = false;
+						}
 					}
 
 					if (last_Hum) {
 						p_Hum_row += 1;
+						if (p_Hum_row >= k)
+						{
+							Human_score += p_Humscore;
+							p_Hum_row = 0;
+							p_Humscore = 0;
+							last_Hum = false;
+						}
 					}
 					AI_row = 0;
 					Hum_row = 0;
@@ -245,7 +259,7 @@ void AIShell::winning_spaces()
 					Hum_row = 0;
 
 
-					if (last_Hum && p_Hum_row <= k)
+					if (p_Hum_row <= k)
 					{
 						p_Humscore = 0;
 						p_Hum_row = 0;
@@ -319,10 +333,24 @@ void AIShell::winning_spaces()
 					
 					if (last_AI) {
 						p_AI_row += 1;
+						if (p_AI_row >= k)
+						{
+							AI_score += p_AIscore;
+							p_AI_row = 0;
+							p_AIscore = 0;
+							last_AI = false;
+						}
 					}
 
 					if (last_Hum) {
 						p_Hum_row += 1;
+						if (p_Hum_row >= k)
+						{
+							Human_score += p_Humscore;
+							p_Hum_row = 0;
+							p_Humscore = 0;
+							last_Hum = false;
+						}
 					}
 					AI_row = 0;
 					Hum_row = 0;
@@ -410,10 +438,24 @@ void AIShell::winning_spaces()
 					
 					if (last_AI) {
 						p_AI_row += 1;
+						if (p_AI_row >= k)
+						{
+							AI_score += p_AIscore;
+							p_AI_row = 0;
+							p_AIscore = 0;
+							last_AI = false;
+						}
 					}
 
 					if (last_Hum) {
 						p_Hum_row += 1;
+						if (p_Hum_row >= k)
+						{
+							Human_score += p_Humscore;
+							p_Hum_row = 0;
+							p_Humscore = 0;
+							last_Hum = false;
+						}
 					}
 					AI_row = 0;
 					Hum_row = 0;
@@ -505,10 +547,24 @@ void AIShell::winning_spaces()
 				{
 					if (last_AI) {
 						p_AI_row += 1;
+						if (p_AI_row >= k)
+						{
+							AI_score += p_AIscore;
+							p_AI_row = 0;
+							p_AIscore = 0;
+							last_AI = false;
+						}
 					}
 
 					if (last_Hum) {
 						p_Hum_row += 1;
+						if (p_Hum_row >= k)
+						{
+							Human_score += p_Humscore;
+							p_Hum_row = 0;
+							p_Humscore = 0;
+							last_Hum = false;
+						}
 					}
 					AI_row = 0;
 					Hum_row = 0;
