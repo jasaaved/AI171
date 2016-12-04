@@ -308,6 +308,42 @@ void AIShell::winning_spaces()
 
 				}
 
+				if (gameState[i][j] == 0)
+				{
+					if (gameState[i + count][j] == 0)
+					{
+						zero_empty += 1;
+					}
+
+					if (gameState[i + count][j] == 1)
+					{
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
+
+						if (!AI_useless)
+						{
+							AI_same += 1;
+							AI_empty = zero_empty;
+						}
+					}
+
+					if (gameState[i + count][j] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+
+						if (!Hum_useless)
+						{
+							hum_same += 1;
+							hum_empty = zero_empty;
+						}
+					}
+				}
+
 				++count;
 
 				if (count >= k)
@@ -399,6 +435,42 @@ void AIShell::winning_spaces()
 						}
 					}
 
+				}
+
+				if (gameState[i][j] == 0)
+				{
+					if (gameState[i + count][j + count] == 0)
+					{
+						zero_empty += 1;
+					}
+
+					if (gameState[i + count][j + count] == 1)
+					{
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
+
+						if (!AI_useless)
+						{
+							AI_same += 1;
+							AI_empty = zero_empty;
+						}
+					}
+
+					if (gameState[i + count][j + count] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+
+						if (!Hum_useless)
+						{
+							hum_same += 1;
+							hum_empty = zero_empty;
+						}
+					}
 				}
 
 				++count;
@@ -494,6 +566,42 @@ void AIShell::winning_spaces()
 					}
 
 
+				}
+
+				if (gameState[i][j] == 0)
+				{
+					if (gameState[i + count][j - count] == 0)
+					{
+						zero_empty += 1;
+					}
+
+					if (gameState[i + count][j - count] == 1)
+					{
+						Hum_useless = true;
+						Hum_row = 0;
+						hum_same = 0;
+						hum_empty = 0;
+
+						if (!AI_useless)
+						{
+							AI_same += 1;
+							AI_empty = zero_empty;
+						}
+					}
+
+					if (gameState[i + count][j - count] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+
+						if (!Hum_useless)
+						{
+							hum_same += 1;
+							hum_empty = zero_empty;
+						}
+					}
 				}
 			
 				++count;
