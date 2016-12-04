@@ -144,7 +144,7 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 int AIShell::FindMax(int alpha, int beta, int d) {
 
 	if (d == 1 || time_left() - start_time >= move_deadline) {
-		if (!temp_best.empty() && index >= temp_best.size()) {
+		if (!temp_best.empty() && index < temp_best.size()) {
 			Move s = temp_best[index];
 			gameState[s.col][s.row] = AI_PIECE;
 
@@ -159,7 +159,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 		for (int i = 0; i < numCols; i++) {
 			for (int j = 0; j < numRows; j++) {
 
-				if (!temp_best.empty() && index >= temp_best.size() && temp_best[index].col == i && temp_best[index].row == j)
+				if (!temp_best.empty() && index < temp_best.size() && temp_best[index].col == i && temp_best[index].row == j)
 				{
 					continue;
 				}
@@ -180,7 +180,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 		return alpha;
 	}
 
-	if (!temp_best.empty() && index >= temp_best.size()) {
+	if (!temp_best.empty() && index < temp_best.size()) {
 		Move s = temp_best[index];
 		temp_best.pop_back();
 		gameState[s.col][s.row] = AI_PIECE;
@@ -196,7 +196,7 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
-			if (!temp_best.empty() && index >= temp_best.size() && temp_best[index].col == i && temp_best[index].row == j)
+			if (!temp_best.empty() && index < temp_best.size() && temp_best[index].col == i && temp_best[index].row == j)
 			{
 				continue;
 			}
