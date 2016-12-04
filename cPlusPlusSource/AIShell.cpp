@@ -51,9 +51,14 @@ Move AIShell::minimax(int d) {
 					gameState[i][j] = AI_PIECE;
 					int possible = FindMin(alpha, beta, d - 1);
 
-					if (d == 2 && possible >= 1000)
+					if (d == 2)
 					{
-						return Move(i, j);
+						int p = score();
+						if (p >= 1000) {
+
+							gameState[i][j] = NO_PIECE;
+							return Move(i, j);
+						}
 					}
 
 					if (possible > alpha && possible > best_alpha)
