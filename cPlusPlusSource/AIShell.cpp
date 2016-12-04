@@ -38,29 +38,7 @@ Move AIShell::minimax(int d) {
 	int col;
 	int row;
 
-	for (int i = 0; i < numCols; i++)
-	{
-		for (int j = 0; j < numRows; j++)
-		{
-			if (gameState[i][j] == NO_PIECE)
-			{
-
-				gameState[i][j] = AI_PIECE;
-				int possible = BestMove();
-				if (possible == 1000)
-				{
-					gameState[i][j] == NO_PIECE;
-					return Move(i, j);
-				}
-				gameState[i][j] == NO_PIECE;
-			}
-		}
-	}
-
-
-
 	while (time_left() - start_time <= move_deadline) {
-		std::cout << "hello" << std::endl;
 		for (int i = 0; i < numCols; i++)
 		{
 			for (int j = 0; j < numRows; j++)
@@ -108,6 +86,10 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 					
 					gameState[i][j] = NO_PIECE;
 
+					if (possible == 1000) {
+						return possible;
+					}
+
 					if (possible < beta) 
 					{
 						beta = possible;
@@ -131,6 +113,10 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 			{
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(alpha, beta, d - 1);
+
+				if (possible == 1000) {
+					return possible;
+				}
 
 
 				if (possible < beta) 
