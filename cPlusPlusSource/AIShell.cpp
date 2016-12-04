@@ -63,6 +63,7 @@ Move AIShell::minimax(int d) {
 		}
 
 		d++;
+		std::cout << "depth: " << d << std::endl;
 		index = 0;
 		alpha = -INF;
 		beta = INF;
@@ -218,7 +219,6 @@ void AIShell::winning_spaces()
 			{
 				if (gameState[i + count][j] == 0)
 				{
-
 					AI_row = 0;
 					Hum_row = 0;
 					p_AIscore = 0;
@@ -255,13 +255,13 @@ void AIShell::winning_spaces()
 						Human_score = 1000;
 						return;
 					}
-					
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						return;
 					}
-					
+					*/
 
 				}
 
@@ -318,14 +318,14 @@ void AIShell::winning_spaces()
 						Human_score = 1000;
 						return;
 					}
-					
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
-					
+					*/
 
 				}
 
@@ -386,14 +386,14 @@ void AIShell::winning_spaces()
 						Human_score = 1000;
 						return;
 					}
-					
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
-					
+					*/
 
 				}
 
@@ -452,14 +452,14 @@ void AIShell::winning_spaces()
 						Human_score = 1000;
 						return;
 					}
-					
+					/*
 					if (Hum_row == k - 1)
 					{
 						Human_score = 1000;
 						AI_score += p_AIscore;
 						return;
 					}
-					
+					*/
 				}
 
 				++count;
