@@ -15,6 +15,7 @@ AIShell::AIShell(int numCols, int numRows, bool gravityOn, int** gameState, Move
 	this->lastMove=lastMove;
 	this->start_time = time_left();
 	this->index = 0;
+	this->depth = 2;
 	
 }
 
@@ -37,6 +38,8 @@ Move AIShell::minimax(int d) {
 	int col = 0;
 	int row = 0;
 
+
+
 	while (time_left() - start_time <= move_deadline) {
 
 		for (int i = 0; i < numCols; i++)
@@ -46,8 +49,17 @@ Move AIShell::minimax(int d) {
 
 				if (gameState[i][j] == NO_PIECE)
 				{
-
 					gameState[i][j] = AI_PIECE;
+					if (depth == 2) 
+					{
+						int possible = FindMax(alpha, beta, d - 1);
+						if (possible == 1000)
+						{
+							col = i;
+							row = j;
+							return Move(col, row);
+						}
+					}
 					int possible = FindMin(alpha, beta, d - 1);
 					if (possible > alpha && possible > best_alpha)
 					{
@@ -304,7 +316,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (Hum_row == k)
 					{
 						Human_score == 1000;
 						return;
