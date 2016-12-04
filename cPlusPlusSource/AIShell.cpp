@@ -147,10 +147,6 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 
 	for (int i = 0; i < numCols; i++) {
 		for (int j = 0; j < numRows; j++) {
-			if (!temp_best.empty() && index < temp_best.size() && temp_best[index].col == i && temp_best[index].row == j)
-			{
-				continue;
-			}
 			if (gameState[i][j] == NO_PIECE) {
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(alpha, beta, d - 1);
@@ -196,9 +192,12 @@ void AIShell::winning_spaces()
 	int current;
 	int AI_row;
 	int Hum_row;
-	int p_AIscore;
-	int p_Humscore;
 	int count;
+	int AI_same;
+	int AI_empty;
+	int hum_same;
+	int hum_empty;
+
 
 	for (int i = 0; i < numCols; ++i) {
 		for (int j = 0; j < numRows; ++j) {
@@ -209,264 +208,268 @@ void AIShell::winning_spaces()
 				else
 					continue;
 			}
-			count = 0;
-			p_AIscore = 0;
-			p_Humscore = 0;
+			count = 1;
 			AI_row = 0;
 			Hum_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			hum_same = 0;
+			hum_empty = 0;
 
-			while (i + count < numCols)
+			while (i + count < numCols && count < k)
 			{
-				if (gameState[i + count][j] == 0)
-				{
-					AI_row = 0;
-					Hum_row = 0;
-					p_AIscore = 0;
-					p_Humscore = 0;
-				}
-
-				if (gameState[i + count][j] == 1)
+				if (gameState[i][j] == 1 && (gameState[i + count][j] == 1 || gameState[i + count][j] == 0))
 				{
 					AI_row += 1;
-					p_Humscore = 0;
-					Hum_row = 0;
 
-					p_AIscore += (5 * AI_row);
+					if (gameState[i + count][j] == 1)
+					{
+						AI_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						AI_empty += 1;
+					}
 
 					if (AI_row == k) 
 					{
-						AI_score = 1000;
-						return;
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+						AI_score += (AI_same * 5) + (AI_empty);
 					}
-
 				}
 
-				if (gameState[i + count][j] == -1)
+				else if (gameState[i][j] == -1 && (gameState[i + count][j] == -1 || gameState[i + count][j] == 0))
 				{
-
 					Hum_row += 1;
-					p_AIscore = 0;
-					AI_row = 0;
 
-					p_Humscore += (5 * Hum_row);
+					if (gameState[i + count][j] == -1)
+					{
+						hum_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						hum_empty += 1;
+					}
 
 					if (Hum_row == k) 
 					{
-						Human_score = 1000;
-						return;
+						if (hum_same == k)
+						{
+							Human_score == 1000;
+							return;
+						}
+						Human_score += (hum_same * 5) + (hum_empty);
 					}
-					/*
-					if (Hum_row == k - 1)
-					{
-						Human_score = 1000;
-						return;
-					}
-					*/
-
 				}
 
 				++count;
 			}
 
-			AI_score += p_AIscore;
-			Human_score += p_Humscore;
 
-			count = 0;
-			p_AIscore = 0;
-			p_Humscore = 0;
+
+			count = 1;
 			AI_row = 0;
 			Hum_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			hum_same = 0;
+			hum_empty = 0;
 
-			while (i + count < numCols && j + count < numRows) 
+			while (i + count < numCols && j + count < numRows && count < k) 
 			{
-				if (gameState[i + count][j + count] == 0)
+				if (gameState[i][j] == 1 && (gameState[i + count][j + count] == 1 || gameState[i + count][j + count] == 0))
 				{
 					
-						AI_row = 0;
-						Hum_row = 0;
-						p_AIscore = 0;
-						p_Humscore = 0;
-
-				}
-
-				if (gameState[i + count][j + count] == 1)
-				{
 					AI_row += 1;
-					p_Humscore = 0;
-					Hum_row = 0;
 
-					p_AIscore += (5 * AI_row);
+					if (gameState[i + count][j] == 1)
+					{
+						AI_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						AI_empty += 1;
+					}
 
 					if (AI_row == k)
 					{
-						AI_score = 1000;
-						return;
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+						AI_score += (AI_same * 5) + (AI_empty);
 					}
 
 				}
 
-				if (gameState[i + count][j + count] == -1)
+				if (gameState[i][j] == -1 && (gameState[i + count][j + count] == -1 || gameState[i + count][j + count] == 0))
 				{
-					Hum_row += 1;;
-					p_AIscore = 0;
-					AI_row = 0;
-
-					p_Humscore += (5 * Hum_row);
-
-					if (Hum_row == k)
-					{
-						Human_score = 1000;
-						return;
-					}
-					/*
-					if (Hum_row == k - 1)
-					{
-						Human_score = 1000;
-						AI_score += p_AIscore;
-						return;
-					}
-					*/
-
-				}
-
-				++count;
-			}
-
-			AI_score += p_AIscore;
-			Human_score += p_Humscore;
-
-			count = 0;
-			p_AIscore = 0;
-			p_Humscore = 0;
-			AI_row = 0;
-			Hum_row = 0;
-
-			while (i + count < numCols && j - count >= 0)
-			{
-				if (gameState[i + count][j - count] == 0)
-				{
-					
-						AI_row = 0;
-						Hum_row = 0;
-						p_AIscore = 0;
-						p_Humscore = 0;
-
-				}
-
-				if (gameState[i + count][j - count] == 1)
-				{
-					AI_row += 1;
-					p_Humscore = 0;
-					Hum_row = 0;
-
-
-					p_AIscore += (5 * AI_row);
-
-
-					if (AI_row == k)
-					{
-						AI_score = 1000;
-						return;
-					}
-
-				}
-
-				if (gameState[i + count][j - count] == -1)
-				{
-
 					Hum_row += 1;
-					p_AIscore = 0;
-					AI_row = 0;
 
+					if (gameState[i + count][j] == -1)
+					{
+						hum_same += 1;
+					}
 
-					p_Humscore += (5 * Hum_row);
+					if (gameState[i + count][j] == 0)
+					{
+						hum_empty += 1;
+					}
 
 					if (Hum_row == k)
 					{
-						Human_score = 1000;
-						return;
+						if (hum_same == k)
+						{
+							Human_score == 1000;
+							return;
+						}
+						Human_score += (hum_same * 5) + (hum_empty);
 					}
-					/*
-					if (Hum_row == k - 1)
-					{
-						Human_score = 1000;
-						AI_score += p_AIscore;
-						return;
-					}
-					*/
-
 				}
 
 				++count;
-
 			}
 
-			AI_score += p_AIscore;
-			Human_score += p_Humscore;
 
-			count = 0;
-			p_AIscore = 0;
-			p_Humscore = 0;
+			count = 1;
 			AI_row = 0;
 			Hum_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			hum_same = 0;
+			hum_empty = 0;
 
-			while (j + count < numRows)
+			while (i + count < numCols && j - count >= 0 && count < k)
 			{
-				if (gameState[i][j + count] == 0)
-				{
-						AI_row = 0;
-						Hum_row = 0;
-						p_AIscore = 0;
-						p_Humscore = 0;
-				}
-
-				if (gameState[i][j + count] == 1)
+				if (gameState[i][j] == 1 && (gameState[i + count][j - count] == 1 || gameState[i + count][j - count] == 0))
 				{
 					
 					AI_row += 1;
-					p_Humscore = 0;
-					Hum_row = 0;
-					
 
-					p_AIscore += (5 * AI_row);
+					if (gameState[i + count][j] == 1)
+					{
+						AI_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						AI_empty += 1;
+					}
+
+					if (AI_row == k)
+					{
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+						AI_score += (AI_same * 5) + (AI_empty);
+					}
+
+				}
+
+				if (gameState[i][j] == -1 && (gameState[i + count][j - count] == -1 || gameState[i + count][j - count] == 0))
+				{
+					Hum_row += 1;
+
+					if (gameState[i + count][j] == -1)
+					{
+						hum_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						hum_empty += 1;
+					}
+
+					if (Hum_row == k)
+					{
+						if (hum_same == k)
+						{
+							Human_score == 1000;
+							return;
+						}
+						Human_score += (hum_same * 5) + (hum_empty);
+					}
+
+				}
 			
+				++count;
+
+			}
+
+			count = 1;
+			AI_row = 0;
+			Hum_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			hum_same = 0;
+			hum_empty = 0;
+
+			while (j + count < numRows && count < k)
+			{
+				if (gameState[i][j] == 1 && (gameState[i][j + count] == 1 || gameState[i][j + count] == 0))
+				{
+					AI_row += 1;
+
+					if (gameState[i + count][j] == 1)
+					{
+						AI_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						AI_empty += 1;
+					}
 
 					if (AI_row == k)
 					{
-						AI_score = 1000;
-						return;
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+						AI_score += (AI_same * 5) + (AI_empty);
 					}
-
 				}
 
-				if (gameState[i][j + count] == -1)
+				if (gameState[i][j] == -1 && (gameState[i][j + count] == -1 || gameState[i][j + count] == 0))
 				{
 					Hum_row += 1;
-					p_AIscore = 0;
-					AI_row = 0;
 
-					p_Humscore += (5 * Hum_row);
+					if (gameState[i + count][j] == -1)
+					{
+						hum_same += 1;
+					}
+
+					if (gameState[i + count][j] == 0)
+					{
+						hum_empty += 1;
+					}
 
 					if (Hum_row == k)
 					{
-						Human_score = 1000;
-						return;
+						if (hum_same == k)
+						{
+							Human_score == 1000;
+							return;
+						}
+						Human_score += (hum_same * 5) + (hum_empty);
 					}
-					/*
-					if (Hum_row == k - 1)
-					{
-						Human_score = 1000;
-						AI_score += p_AIscore;
-						return;
-					}
-					*/
+
+
 				}
 
 				++count;
 			}
-
-			AI_score += p_AIscore;
-			Human_score += p_Humscore;
 
 		}
 	}
