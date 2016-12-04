@@ -76,19 +76,24 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 
 	if (d == 1 || time_left() - start_time >= move_deadline)
 	{
-		for (int i = 0; i < numCols; i++) {
-			for (int j = 0; j < numRows; j++) {
-				if (gameState[i][j] == NO_PIECE) {
+		for (int i = 0; i < numCols; i++)
+		{
+			for (int j = 0; j < numRows; j++) 
+			{
+				if (gameState[i][j] == NO_PIECE) 
+				{
 					gameState[i][j] = HUMAN_PIECE;
 					int possible = score();
 					
 					gameState[i][j] = NO_PIECE;
 
-					if (possible < beta) {
+					if (possible < beta) 
+					{
 						beta = possible;
 					}
 					
-					if (alpha >= beta) {
+					if (alpha >= beta) 
+					{
 						return beta;
 					}
 				}
@@ -97,20 +102,25 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 		return beta;
 	}
 	
-	for (int i = 0; i < numCols; i++) {
-		for (int j = 0; j < numRows; j++) {
-			if (gameState[i][j] == NO_PIECE) {
+	for (int i = 0; i < numCols; i++) 
+	{
+		for (int j = 0; j < numRows; j++) 
+		{
+			if (gameState[i][j] == NO_PIECE) 
+			{
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(alpha, beta, d - 1);
 
 
-				if (possible < beta) {
+				if (possible < beta) 
+				{
 					beta = possible;
 				}
 
 				gameState[i][j] = NO_PIECE;
 
-				if (alpha >= beta || time_left() - start_time >= move_deadline) {
+				if (alpha >= beta || time_left() - start_time >= move_deadline)
+				{
 					return beta;
 				}
 			}
@@ -120,22 +130,29 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 	return beta;
 }
 
-int AIShell::FindMax(int alpha, int beta, int d) {
+int AIShell::FindMax(int alpha, int beta, int d) 
+{
 
-	if (d == 1 || time_left() - start_time >= move_deadline) {
+	if (d == 1 || time_left() - start_time >= move_deadline) 
+	{
 		
-		for (int i = 0; i < numCols; i++) {
-			for (int j = 0; j < numRows; j++) {
+		for (int i = 0; i < numCols; i++) 
+		{
+			for (int j = 0; j < numRows; j++) 
+			{
 
-				if (gameState[i][j] == NO_PIECE) {
+				if (gameState[i][j] == NO_PIECE) 
+				{
 					gameState[i][j] = AI_PIECE;
 					int possible = score();
 					
-					if (possible > alpha) {
+					if (possible > alpha)
+					{
 						alpha = possible;
 					}
 					gameState[i][j] = NO_PIECE;
-					if (alpha >= beta) {
+					if (alpha >= beta) 
+					{
 						return alpha;
 					}
 				}
@@ -145,18 +162,23 @@ int AIShell::FindMax(int alpha, int beta, int d) {
 	}
 
 
-	for (int i = 0; i < numCols; i++) {
-		for (int j = 0; j < numRows; j++) {
-			if (gameState[i][j] == NO_PIECE) {
+	for (int i = 0; i < numCols; i++) 
+	{
+		for (int j = 0; j < numRows; j++)
+		{
+			if (gameState[i][j] == NO_PIECE) 
+			{
 				gameState[i][j] = AI_PIECE;
 				int possible = FindMin(alpha, beta, d - 1);
-				if (possible > alpha) {
+				if (possible > alpha) 
+				{
 					alpha = possible;
 				}
 				gameState[i][j] = NO_PIECE;
 			}
 
-			if (alpha >= beta || time_left() - start_time >= move_deadline) {
+			if (alpha >= beta || time_left() - start_time >= move_deadline) 
+			{
 				return alpha;
 
 			}
@@ -215,7 +237,7 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
-
+			//horizontal check
 			while (i + count < numCols && count < k)
 			{
 				if (gameState[i][j] == 1 && (gameState[i + count][j] == 1 || gameState[i + count][j] == 0))
@@ -280,7 +302,7 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
-
+			//Upper-right diagnol check
 			while (i + count < numCols && j + count < numRows && count < k) 
 			{
 				if (gameState[i][j] == 1 && (gameState[i + count][j + count] == 1 || gameState[i + count][j + count] == 0))
@@ -288,12 +310,12 @@ void AIShell::winning_spaces()
 					
 					AI_row += 1;
 
-					if (gameState[i + count][j] == 1)
+					if (gameState[i + count][j + count] == 1)
 					{
 						AI_same += 1;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (gameState[i + count][j + count] == 0)
 					{
 						AI_empty += 1;
 					}
@@ -314,12 +336,12 @@ void AIShell::winning_spaces()
 				{
 					Hum_row += 1;
 
-					if (gameState[i + count][j] == -1)
+					if (gameState[i + count][j + count] == -1)
 					{
 						hum_same += 1;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (gameState[i + count][j + count] == 0)
 					{
 						hum_empty += 1;
 					}
@@ -346,7 +368,7 @@ void AIShell::winning_spaces()
 			AI_empty = 0;
 			hum_same = 0;
 			hum_empty = 0;
-
+			//check lower right diagonals
 			while (i + count < numCols && j - count >= 0 && count < k)
 			{
 				if (gameState[i][j] == 1 && (gameState[i + count][j - count] == 1 || gameState[i + count][j - count] == 0))
@@ -354,12 +376,12 @@ void AIShell::winning_spaces()
 					
 					AI_row += 1;
 
-					if (gameState[i + count][j] == 1)
+					if (gameState[i + count][j - count] == 1)
 					{
 						AI_same += 1;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (gameState[i + count][j - count] == 0)
 					{
 						AI_empty += 1;
 					}
@@ -380,12 +402,12 @@ void AIShell::winning_spaces()
 				{
 					Hum_row += 1;
 
-					if (gameState[i + count][j] == -1)
+					if (gameState[i + count][j - count] == -1)
 					{
 						hum_same += 1;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (gameState[i + count][j - count] == 0)
 					{
 						hum_empty += 1;
 					}
@@ -420,12 +442,12 @@ void AIShell::winning_spaces()
 				{
 					AI_row += 1;
 
-					if (gameState[i + count][j] == 1)
+					if (gameState[i][j + count] == 1)
 					{
 						AI_same += 1;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (gameState[i][j + count] == 0)
 					{
 						AI_empty += 1;
 					}
@@ -445,12 +467,12 @@ void AIShell::winning_spaces()
 				{
 					Hum_row += 1;
 
-					if (gameState[i + count][j] == -1)
+					if (gameState[i][j + count] == -1)
 					{
 						hum_same += 1;
 					}
 
-					if (gameState[i + count][j] == 0)
+					if (gameState[i][j + count] == 0)
 					{
 						hum_empty += 1;
 					}
