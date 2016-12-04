@@ -38,31 +38,11 @@ Move AIShell::minimax(int d) {
 
 	while (time_left() - start_time <= move_deadline) {
 
-		if (!temp_best.empty()) {
-			Move s = temp_best[index];
-			index++;
-			gameState[s.col][s.row] = AI_PIECE;
-
-			int possible = FindMin(alpha, beta, d - 1);
-			if (possible > alpha)
-			{
-				alpha = possible;
-				col = s.col;
-				row = s.row;
-			}
-			gameState[s.col][s.row] = NO_PIECE;
-
-		}
-		temp_best.clear();
-
 		for (int i = 0; i < numCols; i++)
 		{
 			for (int j = 0; j < numRows; j++)
 			{
-				if (!best_path.empty() && best_path[0].col == i && best_path[0].row == j)
-				{
-					continue;
-				}
+
 
 				if (gameState[i][j] == NO_PIECE)
 				{
@@ -90,7 +70,7 @@ Move AIShell::minimax(int d) {
 		temp_best = best_path;
 	}
 
-	return best_path[0];
+	return Move(col, row);
 }
 
 int AIShell::FindMin(int alpha, int beta, int d) {
