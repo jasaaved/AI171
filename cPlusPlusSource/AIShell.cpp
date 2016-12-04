@@ -38,7 +38,25 @@ Move AIShell::minimax(int d) {
 	int col = 0;
 	int row = 0;
 
+	for (int i = 0; i < numCols; i++)
+	{
+		for (int j = 0; j < numRows; j++)
+		{
+			if (gameState[i][j] == NO_PIECE)
+			{
 
+				gameState[i][j] = AI_PIECE;
+				int possible = FindMax(alpha, beta, d - 1);
+				if (possible == 1000)
+				{
+					col = i;
+					row = j;
+					return Move(col, row);
+				}
+				gameState[i][j] == NO_PIECE;
+			}
+		}
+	}
 
 	while (time_left() - start_time <= move_deadline) {
 
@@ -49,17 +67,8 @@ Move AIShell::minimax(int d) {
 
 				if (gameState[i][j] == NO_PIECE)
 				{
+					
 					gameState[i][j] = AI_PIECE;
-					if (depth == 2) 
-					{
-						int possible = FindMax(alpha, beta, d - 1);
-						if (possible == 1000)
-						{
-							col = i;
-							row = j;
-							return Move(col, row);
-						}
-					}
 					int possible = FindMin(alpha, beta, d - 1);
 					if (possible > alpha && possible > best_alpha)
 					{
@@ -664,6 +673,11 @@ inline double AIShell::time_left() {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
 	return((double)(tv.tv_sec + (double)tv.tv_usec / 1000000.0));
+}
+
+int AIShell::BestMove()
+{
+	return score;
 }
 
 

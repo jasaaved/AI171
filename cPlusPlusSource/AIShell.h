@@ -53,6 +53,7 @@ public:
 	int score();
 	void winning_spaces();
 	inline double time_left();
+	int BestMove();
 };
 
 #endif //AISHELL_H
