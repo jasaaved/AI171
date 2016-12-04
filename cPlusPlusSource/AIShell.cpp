@@ -35,8 +35,8 @@ Move AIShell::minimax(int d) {
 	int alpha = -INF;
 	int best_alpha = -INF;
 	int beta = INF;
-	int col = 0;
-	int row = 0;
+	int col;
+	int row;
 
 	for (int i = 0; i < numCols; i++)
 	{
@@ -60,7 +60,7 @@ Move AIShell::minimax(int d) {
 
 
 	while (time_left() - start_time <= move_deadline) {
-
+		std::cout << "hello" << std::endl;
 		for (int i = 0; i < numCols; i++)
 		{
 			for (int j = 0; j < numRows; j++)
