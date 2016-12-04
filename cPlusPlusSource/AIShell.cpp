@@ -73,6 +73,7 @@ Move AIShell::minimax(int d) {
 		index = 0;
 		alpha = -INF;
 		beta = INF;
+
 	}
 
 	return Move(col, row);
@@ -93,9 +94,6 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 					
 					gameState[i][j] = NO_PIECE;
 
-					if (possible >= 1000) {
-						return possible;
-					}
 
 					if (possible < beta) 
 					{
@@ -120,11 +118,6 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 			{
 				gameState[i][j] = HUMAN_PIECE;
 				int possible = FindMax(alpha, beta, d - 1);
-
-				if (possible >= 1000) {
-					return possible;
-				}
-
 
 				if (possible < beta) 
 				{
@@ -355,7 +348,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score == 1000;
 						return;
@@ -484,7 +477,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score == 1000;
 						return;
@@ -614,7 +607,7 @@ void AIShell::winning_spaces()
 				++count;
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score == 1000;
 						return;
@@ -745,7 +738,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score == 1000;
 						return;
