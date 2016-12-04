@@ -63,7 +63,6 @@ Move AIShell::minimax(int d) {
 		}
 
 		d++;
-		std::cout << "depth: " << d << std::endl;
 		index = 0;
 		alpha = -INF;
 		beta = INF;
@@ -254,15 +253,6 @@ void AIShell::winning_spaces()
 						AI_empty += 1;
 					}
 
-					if (AI_row == k) 
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
-						AI_score += (AI_same * 5) + (AI_empty);
-					}
 				}
 
 				else if (gameState[i][j] == -1 && (gameState[i + count][j] == -1 || gameState[i + count][j] == 0))
@@ -279,18 +269,42 @@ void AIShell::winning_spaces()
 						hum_empty += 1;
 					}
 
-					if (Hum_row == k) 
+				}
+
+				++count;
+
+				if (count >= k)
+				{
+					if (Hum_row == k)
 					{
 						if (hum_same == k)
 						{
 							Human_score == 1000;
 							return;
 						}
+					}
+
+					if (AI_row == k)
+					{
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+						
+					}
+
+					if (Hum_row == 0) 
+					{
+						AI_score += (AI_same * 5) + (AI_empty);
+					}
+
+					if (AI_row == 0)
+					{
 						Human_score += (hum_same * 5) + (hum_empty);
 					}
-				}
 
-				++count;
+				}
 			}
 
 
@@ -320,15 +334,6 @@ void AIShell::winning_spaces()
 						AI_empty += 1;
 					}
 
-					if (AI_row == k)
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
-						AI_score += (AI_same * 5) + (AI_empty);
-					}
 
 				}
 
@@ -346,6 +351,12 @@ void AIShell::winning_spaces()
 						hum_empty += 1;
 					}
 
+				}
+
+				++count;
+
+				if (count >= k)
+				{
 					if (Hum_row == k)
 					{
 						if (hum_same == k)
@@ -353,11 +364,29 @@ void AIShell::winning_spaces()
 							Human_score == 1000;
 							return;
 						}
+					}
+
+					if (AI_row == k)
+					{
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+
+					}
+
+					if (Hum_row == 0)
+					{
+						AI_score += (AI_same * 5) + (AI_empty);
+					}
+
+					if (AI_row == 0)
+					{
 						Human_score += (hum_same * 5) + (hum_empty);
 					}
-				}
 
-				++count;
+				}
 			}
 
 
@@ -386,15 +415,6 @@ void AIShell::winning_spaces()
 						AI_empty += 1;
 					}
 
-					if (AI_row == k)
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
-						AI_score += (AI_same * 5) + (AI_empty);
-					}
 
 				}
 
@@ -412,6 +432,12 @@ void AIShell::winning_spaces()
 						hum_empty += 1;
 					}
 
+
+				}
+			
+				++count;
+				if (count >= k)
+				{
 					if (Hum_row == k)
 					{
 						if (hum_same == k)
@@ -419,12 +445,29 @@ void AIShell::winning_spaces()
 							Human_score == 1000;
 							return;
 						}
+					}
+
+					if (AI_row == k)
+					{
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+
+					}
+
+					if (Hum_row == 0)
+					{
+						AI_score += (AI_same * 5) + (AI_empty);
+					}
+
+					if (AI_row == 0)
+					{
 						Human_score += (hum_same * 5) + (hum_empty);
 					}
 
 				}
-			
-				++count;
 
 			}
 
@@ -452,15 +495,7 @@ void AIShell::winning_spaces()
 						AI_empty += 1;
 					}
 
-					if (AI_row == k)
-					{
-						if (AI_same == k)
-						{
-							AI_score == 1000;
-							return;
-						}
-						AI_score += (AI_same * 5) + (AI_empty);
-					}
+
 				}
 
 				if (gameState[i][j] == -1 && (gameState[i][j + count] == -1 || gameState[i][j + count] == 0))
@@ -477,6 +512,14 @@ void AIShell::winning_spaces()
 						hum_empty += 1;
 					}
 
+
+
+				}
+
+				++count;
+
+				if (count >= k)
+				{
 					if (Hum_row == k)
 					{
 						if (hum_same == k)
@@ -484,13 +527,29 @@ void AIShell::winning_spaces()
 							Human_score == 1000;
 							return;
 						}
+					}
+
+					if (AI_row == k)
+					{
+						if (AI_same == k)
+						{
+							AI_score == 1000;
+							return;
+						}
+
+					}
+
+					if (Hum_row == 0)
+					{
+						AI_score += (AI_same * 5) + (AI_empty);
+					}
+
+					if (AI_row == 0)
+					{
 						Human_score += (hum_same * 5) + (hum_empty);
 					}
 
-
 				}
-
-				++count;
 			}
 
 		}
