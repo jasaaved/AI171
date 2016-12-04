@@ -38,6 +38,7 @@ Move AIShell::minimax(int d) {
 	int col;
 	int row;
 
+
 	while (time_left() - start_time <= move_deadline) {
 		for (int i = 0; i < numCols; i++)
 		{
@@ -49,6 +50,12 @@ Move AIShell::minimax(int d) {
 
 					gameState[i][j] = AI_PIECE;
 					int possible = FindMin(alpha, beta, d - 1);
+
+					if (d == 2 && possible == 1000)
+					{
+						return Move(i, j);
+					}
+
 					if (possible > alpha && possible > best_alpha)
 					{
 						alpha = possible;
