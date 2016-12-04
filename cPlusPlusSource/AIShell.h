@@ -34,6 +34,7 @@ private:
 	std::vector<Move> best_path;
 	std::vector<Move> temp_best;
 	double move_deadline;
+	int index;
 
 
 
