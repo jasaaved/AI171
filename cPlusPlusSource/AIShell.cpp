@@ -47,7 +47,7 @@ Move AIShell::minimax(int d) {
 			{
 				gameState[i][j] = AI_PIECE;
 
-				int p = score();
+				int p = score2();
 
 				if (p >= 1000)
 				{
@@ -218,20 +218,40 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	winning_spaces();
-	if (AI_score >= 1000)
-	{
-		return 1000;
-	}
-	if(Human_score >= 1000) 
+	if (Human_score >= 1000)
 	{
 		return -1000;
 	}
 
-
+	if (AI_score >= 1000)
+	{
+		return 1000;
+	}
 
 
 	return (AI_score - Human_score);
 
+
+
+}
+
+int AIShell::score2()
+{
+	AI_score = 0;
+	Human_score = 0;
+	winning_spaces();
+
+	if (AI_score >= 1000)
+	{
+		return 1000;
+	}
+	if (Human_score >= 1000)
+	{
+		return -1000;
+	}
+
+	
+	return (AI_score - Human_score);
 }
 
 

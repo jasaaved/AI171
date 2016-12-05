@@ -52,6 +52,7 @@ public:
 	int FindMax(int alpha, int beta, int depth);
 	int FindMin(int alpha, int beta, int depth);
 	int score();
+	int score2();
 	void winning_spaces();
 	inline double time_left();
 
