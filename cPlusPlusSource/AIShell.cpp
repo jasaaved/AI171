@@ -218,6 +218,7 @@ int AIShell::score() {
 	AI_score = 0;
 	Human_score = 0;
 	winning_spaces();
+
 	if (Human_score >= 1000)
 	{
 		return -INF;
@@ -395,7 +396,6 @@ void AIShell::winning_spaces()
 					if (AI_same == k)
 					{
 						AI_score = 1000;
-						return;
 					}
 
 					AI_score += (AI_same * 5) + (AI_empty);
@@ -523,7 +523,6 @@ void AIShell::winning_spaces()
 					if (AI_same == k)
 					{
 						AI_score = 1000;
-						return;
 					}
 
 					AI_score += (AI_same * 5) + (AI_empty);
@@ -653,7 +652,7 @@ void AIShell::winning_spaces()
 					if (AI_same == k)
 					{
 						AI_score = 1000;
-						return;
+
 					}
 
 					AI_score += (AI_same * 5) + (AI_empty);
@@ -784,7 +783,6 @@ void AIShell::winning_spaces()
 					if (AI_same == k)
 					{
 						AI_score = 1000;
-						return;
 					}
 
 					AI_score += (AI_same * 5) + (AI_empty);
