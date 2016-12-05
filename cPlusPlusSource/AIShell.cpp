@@ -385,7 +385,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score = 1000;
 						return;
@@ -513,7 +513,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score = 1000;
 						return;
@@ -643,7 +643,7 @@ void AIShell::winning_spaces()
 				++count;
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score = 1000;
 						return;
@@ -774,7 +774,7 @@ void AIShell::winning_spaces()
 
 				if (count >= k)
 				{
-					if (hum_same == k)
+					if (hum_same == k || hum_same == k - 1)
 					{
 						Human_score = 1000;
 						return;
