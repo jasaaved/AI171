@@ -239,7 +239,7 @@ int AIShell::score2()
 {
 	AI_score = 0;
 	Human_score = 0;
-	winning_spaces();
+	winning_spaces2();
 
 	if (AI_score >= 1000)
 	{
@@ -792,6 +792,229 @@ void AIShell::winning_spaces()
 		}
 	}
 					
+
+}
+
+
+void AIShell::winning_spaces2()
+{
+
+	int current;
+	int AI_row;
+	int count;
+	int AI_same;
+	int AI_empty;
+	int zero_empty;
+	bool AI_useless;
+	bool Hum_useless;
+	bool start_zero;
+
+
+	for (int i = 0; i < numCols; ++i) {
+		for (int j = 0; j < numRows; ++j) {
+
+			if (gameState[i][j] == 0) {
+				if (gravityOn)
+					break;
+				else
+					continue;
+			}
+			count = 1;
+			AI_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			AI_useless = false;
+
+			//horizontal check
+			while (i + count < numCols && count < k)
+			{
+				if (gameState[i][j] == 1)
+				{
+					if (gameState[i + count][j] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+					}
+
+					if (!AI_useless)
+					{
+						AI_row += 1;
+
+						if (gameState[i + count][j] == 1)
+						{
+							AI_same += 1;
+						}
+
+					}
+
+				}
+
+
+				++count;
+
+				if (count >= k)
+				{
+
+					if (AI_same == k)
+					{
+						AI_score += 1000;
+						return;
+					}
+				}
+			}
+
+
+
+			count = 1;
+			AI_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			AI_useless = false;
+			Hum_useless = false;
+
+			//Upper-right diagnol check
+			while (i + count < numCols && j + count < numRows && count < k)
+			{
+				if (gameState[i][j] == 1)
+				{
+					if (gameState[i + count][j + count] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+					}
+
+					if (!AI_useless)
+					{
+						AI_row += 1;
+
+						if (gameState[i + count][j + count] == 1)
+						{
+							AI_same += 1;
+						}
+
+					}
+				}
+
+
+				++count;
+
+				if (count >= k)
+				{
+
+					if (AI_same == k)
+					{
+						AI_score == 1000;
+						return;
+					}
+				}
+			}
+
+
+			count = 1;
+			AI_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			AI_useless = false;
+			Hum_useless = false;
+			//check lower right diagonals
+			while (i + count < numCols && j - count >= 0 && count < k)
+			{
+				if (gameState[i][j] == 1)
+				{
+
+					if (gameState[i + count][j - count] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+					}
+
+					if (!AI_useless)
+					{
+						AI_row += 1;
+
+						if (gameState[i + count][j - count] == 1)
+						{
+							AI_same += 1;
+						}
+					}
+
+
+				}
+
+				++count;
+				if (count >= k)
+				{
+					
+
+					if (AI_same == k)
+					{
+						AI_score = 1000;
+						return;
+					}
+
+				}
+
+			}
+
+			count = 1;
+			AI_row = 0;
+			AI_same = 0;
+			AI_empty = 0;
+			zero_empty = 0;
+			AI_useless = false;
+			Hum_useless = false;
+
+			//check vertical
+			while (j + count < numRows && count < k)
+			{
+				if (gameState[i][j] == 1)
+				{
+					if (gameState[i][j + count] == -1)
+					{
+						AI_useless = true;
+						AI_row = 0;
+						AI_same = 0;
+						AI_empty = 0;
+					}
+
+					if (!AI_useless)
+					{
+						AI_row += 1;
+
+						if (gameState[i][j + count] == 1)
+						{
+							AI_same += 1;
+						}
+
+					}
+
+
+				}
+
+				
+				++count;
+
+				if (count >= k)
+				{
+
+					if (AI_same == k)
+					{
+						AI_score = 1000;
+						return;
+					}
+
+				}
+			}
+
+		}
+	}
+
 
 }
 

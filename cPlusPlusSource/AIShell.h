@@ -54,6 +54,7 @@ public:
 	int score();
 	int score2();
 	void winning_spaces();
+	void winning_spaces2();
 	inline double time_left();
 
 };
