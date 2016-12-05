@@ -57,6 +57,11 @@ Move AIShell::minimax(int d) {
 
 				gameState[i][j] = NO_PIECE;
 
+				if (gravityOn)
+				{
+					break;
+				}
+
 			}
 		}
 	}
@@ -84,7 +89,13 @@ Move AIShell::minimax(int d) {
 					}
 					gameState[i][j] = NO_PIECE;
 
+					if (gravityOn)
+					{
+						break;
+					}
+
 				}
+
 			}
 		}
 
@@ -123,7 +134,13 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 					{
 						return beta;
 					}
+
+					if (gravityOn)
+					{
+						break;
+					}
 				}
+
 			}
 		}
 		return beta;
@@ -145,11 +162,17 @@ int AIShell::FindMin(int alpha, int beta, int d) {
 
 				gameState[i][j] = NO_PIECE;
 
-				if (alpha >= beta || time_left() - start_time >= move_deadline)
+				if (gravityOn)
 				{
-					return beta;
+					break;
 				}
 			}
+
+			if (alpha >= beta || time_left() - start_time >= move_deadline)
+			{
+				return beta;
+			}
+
 		}
 	}
 
@@ -181,6 +204,11 @@ int AIShell::FindMax(int alpha, int beta, int d)
 					{
 						return alpha;
 					}
+
+					if (gravityOn)
+					{
+						break;
+					}
 				}
 			}
 		}
@@ -201,6 +229,11 @@ int AIShell::FindMax(int alpha, int beta, int d)
 					alpha = possible;
 				}
 				gameState[i][j] = NO_PIECE;
+
+				if (gravityOn)
+				{
+					break;
+				}
 			}
 
 			if (alpha >= beta || time_left() - start_time >= move_deadline) 
