@@ -220,7 +220,7 @@ int AIShell::score() {
 	winning_spaces();
 	if (Human_score >= 1000)
 	{
-		return -1000;
+		return -10000;
 	}
 
 	if (AI_score >= 1000)
